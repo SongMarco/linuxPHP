@@ -12,6 +12,7 @@
     <div id="container">
         <h1 class="title">회원가입</h1>
         <form name="signUp" action="./memberSave.php" method="post" onsubmit="return checkSubmit()">
+
             <div class="line">
                 <p>아이디</p>
                 <div class="inputArea">

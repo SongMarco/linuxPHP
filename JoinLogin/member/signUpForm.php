@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>에버디벨 :: 회원가입 폼</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
-    <script type="text/javascript" src="../js/mySignupForm.js"></script>
+    <script type="text/javascript" src="../../engstudy/assets/js/mySignupForm.js"></script>
     <link rel="stylesheet" href="../css/mySignupForm.css" />
 </head>
 <body>

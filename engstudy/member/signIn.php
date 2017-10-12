@@ -15,8 +15,8 @@ $row = $res->fetch_array(MYSQLI_ASSOC);
 
 if ($row != null) {
     $_SESSION['ses_userid'] = $row['memberId'];
-    echo $_SESSION['ses_userid'].'님 안녕하세요';
-    echo '로그아웃 하기';
+    echo $_SESSION['ses_userid'].'님 로그인되셨습니다.';
+    
 }
 
 if($row == null){

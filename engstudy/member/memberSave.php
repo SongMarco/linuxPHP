@@ -46,5 +46,6 @@ $sql = "INSERT INTO member VALUES('','{$memberId}','{$memberName}','{$memberNick
 
 if($dbConnect->query($sql)){
     echo '회원가입 성공';
+    echo "name =$memberName";
 }
 ?>
