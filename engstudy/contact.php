@@ -25,7 +25,7 @@
                     <li role="presentation"><a href="index.html">홈 </a></li>
                     <li role="presentation"><a href="#">활용 가이드 </a></li>
                     <li role="presentation"><a href="#">자유게시판 </a></li>
-                    <li class="active" role="presentation"><a href="contact.html">문의하기 </a></li>
+                    <li class="active" role="presentation"><a href="contact.php">문의하기 </a></li>
                 </ul>
                 <form class="navbar-form navbar-left" target="_self">
                     <div class="form-group">
@@ -36,9 +36,13 @@
                 style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a></div>
         </div>
     </nav>
+
+
     <div class="contact-clean">
-        <form name="contact" action="./contact/contactSave.php"method="post" >
-            <!--       메일보내기 아직 예외처리가 안되었다. smtp를 활용해야 한다 -->
+        <form name="contact" action="<?=$_SERVER['PHP_SELF']?>"method="post" >
+            <!--       메일보내기 아직 예외처리가 안되었다. smtp -->
+            <input type="hidden" name="action" value="form_submit" />
+
             <h2 class="text-center">문의사항을 전달해드립니다. </h2>
             <div class="form-group has-success">
                 <input class="form-control" type="text" name="name" placeholder="이름">
@@ -50,12 +54,42 @@
                 <textarea class="form-control" rows="14" name="message" placeholder="내용을 입력하세요..."></textarea>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">보내기 </button>
+                <button class="btn btn-primary" type="submit" >보내기 </button>
             </div>
         </form>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+    <?php
+    $action = '';
+    if(isset($_POST['action']))$action = $_POST['action'];
+
+    //폼이 입력되었을 때 처리부분이다. 스스로 post받아서 디비에 저장시킨다.
+    if($action == 'form_submit') {
+
+        include "./include/dbConnect.php";
+        $contactName = $_POST['name'];
+        $contactEmail = $_POST['email'];
+        $contactMessage = $_POST['message'];
+
+        $sql = "select * from contact;";
+
+        $res = $dbConnect->query($sql);
+
+
+        $sql = "INSERT INTO contact VALUES('','{$contactName}','{$contactEmail}','{$contactMessage}');";
+
+        if($dbConnect->query($sql)){
+            echo "<script>alert(\"운영자에게 메시지를 보냈습니다.\");</script>";
+        }
+
+
+        exit;
+    }
+    ?>
 </body>
 
 </html>
