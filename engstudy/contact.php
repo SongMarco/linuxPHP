@@ -29,10 +29,12 @@
                 </ul>
                 <form class="navbar-form navbar-left" target="_self">
                     <div class="form-group">
-                        <label class="control-label" for="search-field">Typo 검색<i class="glyphicon glyphicon-search"></i></label>
+                        <label class="control-label" for="search-field">Typo 검색</label>
                         <input class="form-control search-field" type="search" name="search" id="search-field">
                     </div>
-                </form><a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member/signUpForm.php" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a><a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member"
+                    <button class="btn btn-primary" type="button" style="background-color:rgb(75,84,75);"> <i class="glyphicon glyphicon-search"></i></button>
+                </form>
+                <a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member/signUpForm.php" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a><a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member"
                 style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a></div>
         </div>
     </nav>
