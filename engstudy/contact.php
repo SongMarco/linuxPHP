@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li role="presentation"><a href="index.html">홈 </a></li>
-                    <li role="presentation"><a href="#">활용 가이드 </a></li>
+                    <li role="presentation"><a href="guide.php">활용 가이드 </a></li>
                     <li role="presentation"><a href="#">자유게시판 </a></li>
                     <li class="active" role="presentation"><a href="contact.php">문의하기 </a></li>
                 </ul>
