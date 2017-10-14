@@ -49,7 +49,8 @@
                                 <input type="hidden" name="action" value="form_submit" />
 
 <!--잘봐! 밑에 버튼에서 name, value를 통해서 값을 넘겨주고 있잖아! name이 키 역할, 밸류가 밸류 역할을 하는군!!!@@!@!@!@-->
-                                <button class="btn btn-default" type="submit" name = "num_guide" value="1">Guide 1</button>
+<!--                               두 가지 원리가 동일한 결과를 반환하는 것을 주목하라. href & self get-->
+                                <a class="btn btn-default" href="guide.php?action=form_submit&num_guide=1" name = "num_guide" >Guide 1</a>
                                 <button class="btn btn-default" type="submit" name = "num_guide" value="2" = "2" style="background-color:rgb(179,55,55);">Guide 2</button>
                                 <button class="btn btn-default" type="submit" name = "num_guide" value="3">Guide 3</button>
                                 <button class="btn btn-default" type="submit" name = "num_guide" value="4"style="background-color:rgb(184,208,33);" >Guide 4</button>
@@ -57,24 +58,26 @@
 
 
                         </div>
+
                     </div>
-                </div>
+                    <?php
+                    $action = '';
+                    if(isset($_GET['action']))$action = $_GET['action'];
 
-                <?php
-                $action = '';
-                if(isset($_GET['action']))$action = $_GET['action'];
-
-                //폼이 입력되었을 때 처리부분이다. 스스로 post받아서 디비에 저장시킨다.
-                if($action == 'form_submit') {
+                    //폼이 입력되었을 때 처리부분이다. 스스로 post받아서 디비에 저장시킨다.
+                    if($action == 'form_submit') {
 
 //                    echo print_r($_GET);
 //                    echo'\n';
-                    $num_guide = $_GET['num_guide'];
-                    echo "현재 가이드는 $num_guide 번 가이드입니다.";
+                        $num_guide = $_GET['num_guide'];
+                        echo "현재 가이드는 $num_guide 번 가이드입니다.";
 
-                    exit;
-                }
-                ?>
+                        exit;
+                    }
+                    ?>
+                </div>
+
+
 
 
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
