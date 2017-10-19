@@ -41,7 +41,7 @@
 
 
     <div class="contact-clean">
-        <form name="contact" action="<?=$_SERVER['PHP_SELF']?>"method="post" >
+        <form name="contact" action="<?=$_SERVER['PHP_SELF']?>" method="post" >
             <!--       메일보내기 아직 예외처리가 안되었다. smtp -->
             <input type="hidden" name="action" value="form_submit" />
 
@@ -73,18 +73,21 @@
     if($action == 'form_submit') {
 
         include "./include/dbConnect.php";
+
         $contactName = $_POST['name'];
         $contactEmail = $_POST['email'];
         $contactMessage = $_POST['message'];
 
+        //echo "<script>alert(\"$contactEmail, $contactMessage, $contactName :: 운영자에게 메시지를 보냈습니다.\");</script>";
         $sql = "select * from contact;";
 
-        $res = $dbConnect->query($sql);
+        $query = mysqli_query($dbConnect, $sql) or die("123123");
 
+        $sql = "INSERT INTO contact(name, email, message) 
+                VALUES('$contactName','$contactEmail','$contactMessage');";
 
-        $sql = "INSERT INTO contact VALUES('','{$contactName}','{$contactEmail}','{$contactMessage}');";
-
-        if($dbConnect->query($sql)){
+        $query = mysqli_query($dbConnect, $sql);
+        if($query){
             echo "<script>alert(\"운영자에게 메시지를 보냈습니다.\");</script>";
         }
 
