@@ -33,8 +33,8 @@
             $no = $_GET[no];
 
             // 먼저 쓴 글의 정보를 가져온다.
-            $result=mysql_query("SELECT * FROM board WHERE id=$id", $conn);
-            $row=mysql_fetch_array($result);
+            $result=mysqli_query($conn,"SELECT * FROM board WHERE id=$id" );
+            $row=mysqli_fetch_array($result);
             ?>
             <!-- 입력 부분 -->
             <tr>
