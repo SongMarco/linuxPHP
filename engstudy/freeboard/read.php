@@ -56,7 +56,7 @@
         </tr>
         <!-- 기타 버튼 들 -->
         <tr>
-            <td colspan=4 bgcolor=#999999>
+            <td colspan=4 bgcolor=#333333>
                 <table width=100%>
                     <tr>
                         <td width=200 align=left height=20>
@@ -73,21 +73,7 @@
                         <!-- 이전 다음 표시 -->
                         <td align=right>
                             <?
-                            // 현재 글보다 id 값이 큰 글 중 가장 작은 것을 가져온다. 삭제됬을때를 생각해서 이렇게 구현함
-                            // 즉 바로 이전 글 ORDER BY id ASC가 함축됨 즉 오름차순으로 정렬되있음
-                            $query=mysqli_query($conn,"SELECT id FROM board WHERE id >$id LIMIT 1"
-                                );
-                            $prev_id=mysqli_fetch_array($query);
 
-                            if ($prev_id[id]) // 이전 글이 있을 경우
-                            {
-                                echo "<a href=read.php?id=$prev_id[id]>
-        <font color=white>[이전]</font></a>";
-                            }
-                            else
-                            {
-                                echo "[이전]";
-                            }
 
                             //내림차순으로 정렬하고 작은 것 한개 가져옴
                             $query=mysqli_query($conn, "SELECT id FROM board WHERE id <$id 
@@ -97,12 +83,30 @@
                             if ($next_id[id])
                             {
                                 echo "<a href=read.php?id=$next_id[id]>
+        <font color=white>[이전]</font></a>";
+                            }
+                            else
+                            {
+                                echo "[이전]";
+                            }
+
+                            // 현재 글보다 id 값이 큰 글 중 가장 작은 것을 가져온다. 삭제됬을때를 생각해서 이렇게 구현함
+                            // 즉 바로 이전 글 ORDER BY id ASC가 함축됨 즉 오름차순으로 정렬되있음
+                            $query=mysqli_query($conn,"SELECT id FROM board WHERE id >$id LIMIT 1"
+                                );
+                            $prev_id=mysqli_fetch_array($query);
+
+                            if ($prev_id[id]) // 이전 글이 있을 경우
+                            {
+                                echo "<a href=read.php?id=$prev_id[id]>
         <font color=white>[다음]</font></a>";
                             }
                             else
                             {
                                 echo "[다음]";
                             }
+
+
                             ?>
                         </td>
                     </tr>

@@ -41,14 +41,14 @@
                 <td bgcolor=white>&nbsp;
                     <table>
                         <tr>
-                            <td width=60 align=left >이름</td>
+                            <td width=60 align=left >&nbsp;이름 &nbsp;</td>
                             <td align=left >
                                 <INPUT type=text name=name size=20
                                        value="<?=$row[name]?>">
                             </td>
                         </tr>
                         <tr>
-                            <td width=60 align=left >이메일</td>
+                            <td width=60 align=left > email </td>
                             <td align=left >
                                 <INPUT type=text name=email size=20
                                        value="<?=$row[email]?>">

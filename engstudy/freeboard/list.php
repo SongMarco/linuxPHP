@@ -35,7 +35,7 @@ $current_page = ceil(($no+1)/$page_size);
 ?>
 <html>
 <head>
-    <title>초 허접 게시판 </title>
+    <title> 타이포셔너리 :: 자유게시판 </title>
     <style>
         <!--
         td {font-size : 9pt;}
@@ -50,7 +50,7 @@ $current_page = ceil(($no+1)/$page_size);
 <center>
     <BR>
     <!-- 게시판 타이틀 -->
-    <font size=2>자~ 버그를 찾읍시다~ 버그를~~</font>
+    <font size=2>타이포셔너리 자유게시판입니다. 기본적인 매너를 지켜주시기 바랍니다.</font>
         <BR>
         <BR>
         <!-- 게시물 리스트를 보이기 위한 테이블 -->

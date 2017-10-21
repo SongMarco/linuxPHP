@@ -1,6 +1,7 @@
 <html>
 <head>
-    <title>초 허접 게시판</title>
+    <meta charset="utf-8">
+    <title>Typotionary :: 자유게시판</title>
     <style>
         <!--
         td { font-size : 9pt; }
@@ -18,7 +19,7 @@
     <BR>
     <!-- 입력된 값을 다음 페이지로 넘기기 위해 FORM을 만든다. -->
     <form action=insert.php method=post>
-        <table width=580 border=0 cellpadding=5 cellspacing=1 bgcolor=#777777>
+        <table width=600 border=3 cellpadding=5 cellspacing=5 bgcolor=#777777>
             <tr>
                 <td height=20 align=center bgcolor=#999999>
                     <font color=white><B>글 쓰 기</B></font>
@@ -29,13 +30,13 @@
                 <td bgcolor=white>&nbsp;
                     <table>
                         <tr>
-                            <td width=60 align=center >이름</td>
+                            <td width=60 align=center >&nbsp;이름&nbsp;</td>
                             <td align=left>
                                 <INPUT type=text name=name size=15 maxlength=10>
                             </td>
                         </tr>
                         <tr>
-                            <td width=60 align=left >이메일</td>
+                            <td width=60 align=left >email</td>
                             <td align=left >
                                 <INPUT type=text name=email size=20 maxlength=25>
                             </td>
