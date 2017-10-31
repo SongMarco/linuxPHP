@@ -22,7 +22,7 @@
     <?php
     include "./include/session.php";
     $prevPage = $_SERVER["HTTP_REFERER"];
-    echo $prevPage;
+
 
 
     if($_SESSION['ses_userName']){

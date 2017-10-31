@@ -1,7 +1,12 @@
 <?php
+
+include "../include/session.php";
+
 	$sql = 'select * from comment_free where co_no=co_order and b_no=' . $bNo;
 	$result = $db->query($sql);
 ?>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <div id="commentView">
 	<form action="comment_update.php" method="post">
 		<input type="hidden" name="bno" value="<?php echo $bNo?>">
@@ -14,9 +19,30 @@
 					<div class="commentInfo">
 						<div class="commentId">작성자: <span class="coId"><?php echo $row['co_id']?></span></div>
 						<div class="commentBtn">
-							<a href="#" class="comt write">댓글</a>
-							<a href="#" class="comt modify">수정</a>
-							<a href="#" class="comt delete">삭제</a>
+
+
+
+                            <?php
+
+                            // 세션의 닉네임과 글쓴이 이름이 같으면 수정 삭제 가능.
+                            if( $_SESSION['ses_userName'] == $row['co_id']){
+
+                                echo "<a href=\"#\" class=\"comt write\">댓글</a>
+                            <a id = \"editComment\" href=\"#\" class=\"comt modify\">수정</a>
+                            <a id =\"deleteComment\" href=\"#\" class=\"comt delete\">삭제</a> ";
+
+                            }
+
+                            else{
+                                echo "<a href=\"#\" class=\"comt write\">댓글</a>";
+                            }
+
+                            ?>
+
+
+
+
+
 						</div>
 					</div>
 					<div class="commentContent"><?php echo $row['co_content']?></div>
@@ -33,22 +59,39 @@
 							<div class="commentInfo">
 								<div class="commentId">작성자:  <span class="coId"><?php echo $row2['co_id']?></span></div>
 								<div class="commentBtn">
-									<a href="#" class="comt modify">수정</a>
-									<a href="#" class="comt delete">삭제</a>
+
+
+                                    <?php
+
+                                    // 세션의 닉네임과 글쓴이 이름이 같으면 수정 삭제 가능.
+                                    // php 안에 html 넣으려면 에코를 쓰면 된다 @@@
+                                    if( $_SESSION['ses_userName'] == $row2['co_id']){
+
+                                        echo "<a id=\"editComment2\" href=\"#\" class=\"comt modify\">수정</a>
+									<a id=\"deleteComment2\" href=\"#\" class=\"comt delete\">삭제</a>";
+
+                                    }
+
+
+                                    ?>
+
+
+
+
+
 								</div>
 							</div>
 							<div class="commentContent"><?php echo $row2['co_content'] ?></div>
 						</div>
 					</li>
 				</ul>
-				<?php
-					}
-				?>
+
 			</li>
 		</ul>
 		<?php } ?>
 	</form>
 </div>
+
 <form action="comment_update.php" method="post">
 	<input type="hidden" name="bno" value="<?php echo $bNo?>">
 	<table>

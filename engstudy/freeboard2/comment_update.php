@@ -85,7 +85,7 @@
 ?>
 		<script>
 			alert('댓글이 정상적으로 <?php echo $msg?>되었습니다.');
-			location.replace("./view.php?bno=<?php echo $bNo?>");
+			location.replace("./read.php?bno=<?php echo $bNo?>");
 		</script>
 <?php
 	} else {

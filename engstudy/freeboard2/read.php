@@ -61,6 +61,8 @@ $row = $result->fetch_assoc();
 
             <script>
 
+//              본 스크립트를 적용하려면 헤드를 손봐야 한다!! 헤드에 <script src="http://code.jquery.com/jquery-latest.js"> 확인하기
+//              php 파일에 세션도 포함시켜야 한다.(세션스타트!!)
                 var ses_userName = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
                 var writerName = "<?php echo $row['b_id']?>";
                 // 세션의 닉네임과 글쓴이가 동일하다면 -> 수정, 삭제를 보이게 해라.(아무것도 안함. 다 보임)
@@ -79,6 +81,7 @@ $row = $result->fetch_assoc();
             </script>
         </div>
         <div id="boardComment">
+
             <?php require_once('./comment.php')?>
         </div>
     </div>
