@@ -42,7 +42,6 @@ $row = $result->fetch_assoc();
         <div><?php
             include "../include/session.php";
 
-            echo $_SESSION['ses_userName'];
             echo $_SESSION['ses_userName'].'님 환영합니다.';?>
 
         </div>
@@ -62,13 +61,15 @@ $row = $result->fetch_assoc();
 
             <script>
 
-                var is_logged_in = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
+                var ses_userName = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
+                var writerName = "<?php echo $row['b_id']?>";
+                // 세션의 닉네임과 글쓴이가 동일하다면 -> 수정, 삭제를 보이게 해라.(아무것도 안함. 다 보임)
+                if (ses_userName ==  writerName ) {
 
-                // 세션의 닉네임과 글쓴이가 동일하다면 -> 수정, 삭제를 보이게 해라.
-                if (is_logged_in) {
 
-
-                } else {
+                }
+                // 세션의 닉네임과 글쓴이가 다르다 -> 수정 삭제를 감춘다!
+                else {
 
                     document.getElementById('edit').style.display='none';
                     document.getElementById('del').style.display='none';

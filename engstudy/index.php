@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 
@@ -11,18 +13,54 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/user.css">
     <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
 <body>
+<div style="text-align: right">
+
+    <?php
+    include "./include/session.php";
+    $prevPage = $_SERVER["HTTP_REFERER"];
+    echo $prevPage;
+
+
+    if($_SESSION['ses_userName']){
+
+        echo $_SESSION['ses_userName'].'님 환영합니다.';
+    }
+
+
+    ?>
+
+    <p>Hello</p>
+    <a href="#">Click to hide me</a>
+    <p>Here is another paragraph</p>
+    <script> $("p").hide();
+
+
+
+
+    $("a").click(function ( event ) {
+        event.preventDefault();
+    $(this).hide();
+    });
+
+    </script>
+
+
+</div>
+
+
     <div>
         <nav class="navbar navbar-default">
             <div class="container">
-                <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.html" style="font-family:ABeeZee, sans-serif;">TYPOTIONARY </a>
+                <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php" style="font-family:ABeeZee, sans-serif;">TYPOTIONARY </a>
                     <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav">
-                        <li class="active" role="presentation"><a href="index.html">홈 </a></li>
+                        <li class="active" role="presentation"><a href="index.php">홈 </a></li>
                         <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>
                         <li role="presentation"><a href="./freeboard2">자유게시판 </a></li>
                         <li role="presentation"><a href="contact.php">문의하기 </a></li>
@@ -34,8 +72,38 @@
                         </div>
                         <button class="btn btn-primary" type="submit" style="background-color:rgb(75,84,75);"> <i class="glyphicon glyphicon-search"></i></button>
                     </form>
-                    <a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member/signUpForm.php" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                    <a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a></div>
+
+
+                    <div>
+                    <a id="join" class="btn btn-primary navbar-btn navbar-right" role="button" href="joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
+                    <a id="login" class="btn btn-primary navbar-btn navbar-right" role="button" href="./LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+                    <a id="logout" class="btn btn-primary navbar-btn navbar-right" role="button" href="./LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+
+                        <script>
+
+                            var is_logged_in = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
+
+                            if (is_logged_in) {
+
+                                document.getElementById('join').style.display='none';
+                                document.getElementById('login').style.display='none';
+                                //your code..$(".class or #id").addClass("xyz");//show,hide or any appropriate action
+                            } else {
+
+                                document.getElementById('logout').style.display='none';
+                            }
+
+
+//                        $("a").click(function ( event ) {
+//                            event.preventDefault();
+//                            $(this).hide();
+//                        });
+
+
+                        </script>
+
+                    </div>
+                </div>
             </div>
         </nav>
     </div>
@@ -65,6 +133,8 @@
     </footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+
 </body>
 
 </html>

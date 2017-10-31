@@ -56,7 +56,7 @@ if(empty($msg)) {
 		if(empty($bNo)) {
 			$bNo = $db->insert_id;
 		}
-		$replaceURL = './view.php?bno=' . $bNo;
+		$replaceURL = './read.php?bno=' . $bNo;
 	} else {
 		$msg = '글을 ' . $msgState . '하지 못했습니다.';
 ?>

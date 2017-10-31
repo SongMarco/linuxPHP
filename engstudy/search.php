@@ -17,12 +17,12 @@
 <div>
     <nav class="navbar navbar-default">
         <div class="container">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.html" style="font-family:ABeeZee, sans-serif;">TYPOTIONARY </a>
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php" style="font-family:ABeeZee, sans-serif;">TYPOTIONARY </a>
                 <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="active" role="presentation"><a href="index.html">홈 </a></li>
+                    <li class="active" role="presentation"><a href="index.php">홈 </a></li>
                     <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>
                     <li role="presentation"><a href="#">자유게시판 </a></li>
                     <li role="presentation"><a href="contact.php">문의하기 </a></li>
