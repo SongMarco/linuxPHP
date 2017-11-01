@@ -272,7 +272,44 @@
 			</table>
 
             <div style="margin-left: auto">
-                <a href="./write.php" >글쓰기</a>
+
+
+
+
+                <?php
+
+                include "../include/session.php";
+
+                //로그인 되있다면 글쓰기가 가능하다.
+                if($_SESSION['ses_userName']){
+
+                    echo "<a href=\"./write.php\" >글쓰기</a>";
+                }
+
+                //로그인이 안되었다. 글쓰기 누르면 알림창 띄우고 로그인 창으로.
+                else {
+                    echo "<a href=\"javascript:onClick=writeConfirm()\" >글쓰기</a>";
+
+
+                }
+
+                ?>
+<!--                writePermission 은 확인 / 취소가 있다. 컨펌임! 반면에 writeAlert는 확인만 있는 alert!-->
+                <script>
+                    function writeConfirm(){
+                        if( confirm("사이트 회원만 글을 쓸 수 있습니다. 로그인 창으로 이동합니다." ) ){
+                            location.href="../LoginMember";
+                        }
+                    }
+                </script>
+
+                <script>
+                    function writeAlert(){
+                        alert("사이트 회원만 글을 쓸 수 있습니다. 로그인 창으로 이동합니다." );
+                        location.href="../LoginMember";
+
+                    }
+                </script>
 
             </div>
 

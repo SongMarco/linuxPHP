@@ -99,6 +99,7 @@ $result = $db->query($sql);
         </tbody>
     </table>
     <div class="btnSet">
+
         <input type="submit" value="댓글 쓰기">
     </div>
 </form>

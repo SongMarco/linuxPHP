@@ -42,6 +42,13 @@
 
             <div class="form-group text-center">
               <button type="submit" class="btn btn-info">로그인<i class="fa fa-check spaceLeft"></i></button>
+
+              <!--<button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button>-->
+            </div>
+
+            <div class="form-group text-center">
+
+              <a class="btn btn-primary" role="button" href="../joinMember">회원가입</a>
               <!--<button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button>-->
             </div>
           </form>
