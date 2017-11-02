@@ -19,7 +19,7 @@ if ($row != null) {
     echo $_SESSION['ses_userName'].'님 로그인되셨습니다.';
 
     sleep(1);
-    echo "<script>location.href='../index.php';</script>";
+    echo "<script>history.go(-2);</script>";
 }
 
 if($row == null){
