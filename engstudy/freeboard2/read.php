@@ -32,17 +32,28 @@ $row = $result->fetch_assoc();
     <script src="./js/jquery-2.1.3.min.js"></script>\
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+
+
+
+    <style> .centered { display: table; margin-left: auto; margin-right: auto; }
+    </style>
 </head>
 <body>
-<article class="boardArticle">
+
+
+<!--가운데 정렬하는법. 클래스 = 센터드를 추가해주었다. 위에 헤더에 스타일 - 센터드도 있음. 참고! -->
+<div class="centered">
+<article >
     <h3 style="text-align: center">자유게시판</h3>
 
 
     <div id="boardView">
-        <div><?php
+        <div ><?php
             include "../include/session.php";
 
-            echo $_SESSION['ses_userName'].'님 환영합니다.';?>
+//            echo $_SESSION['ses_userName'].'님 환영합니다.';?>
 
         </div>
 
@@ -54,11 +65,51 @@ $row = $result->fetch_assoc();
         </div>
         <div id="boardContent"><?php echo $row['b_content']?></div>
         <div class="btnSet">
+            <form action="./delete_update.php" method="post" >
+<!--                onsubmit="return validate(this)"-->
+                <input type="hidden" name="bno" value="<?php echo $bNo?>">
+
             <a id = "edit" href="./write.php?bno=<?php echo $bNo?>">수정</a>
-            <a id = "del" href="./delete.php?bno=<?php echo $bNo?>">삭제</a>
+<!--            <a id = "del" href="./delete.php?bno=--><?php //echo $bNo?><!--">삭제</a>-->
+            <a id = "del" href="javascript:onClick=deleteConfirm()">삭제</a>
+            <a href="javascript:onClick=deleteConfirm()" >글쓰기</a>
+
+
+<!--                <script>-->
+<!--                    function validate(form) {-->
+<!---->
+<!--                        // validation code here ...-->
+<!---->
+<!---->
+<!--                        if(!valid) {-->
+<!--                            alert('Please correct the errors in the form!');-->
+<!--                            return false;-->
+<!--                        }-->
+<!--                        else {-->
+<!--                            return confirm('글을 삭제하시겠습니까?');-->
+<!--                        }-->
+<!--                    }-->
+<!--                </script>-->
+
+
+
+                <script>
+                function deleteConfirm(){
+                    if( confirm("글을 삭제하시겠습니까?" ) ){
+
+                        document.forms[0].submit();
+
+                    }
+
+                }
+                 </script>
+
+
+
+<!--                //                        location.href="./delete.php?bno=--><?php ////echo $bNo?><!--//";-->
             <a id = "list" href="./">목록</a>
 
-
+            </form>
             <script>
 
 //              본 스크립트를 적용하려면 헤드를 손봐야 한다!! 헤드에 <script src="http://code.jquery.com/jquery-latest.js"> 확인하기
@@ -86,5 +137,6 @@ $row = $result->fetch_assoc();
         </div>
     </div>
 </article>
+</div>
 </body>
 </html>

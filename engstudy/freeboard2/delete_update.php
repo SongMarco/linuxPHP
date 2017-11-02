@@ -17,18 +17,16 @@ if(isset($bNo)) {
 	
 	//비밀번호가 맞다면 삭제 쿼리 작성
 	if($row['cnt']) {
+
 		$sql = 'delete from board_free where b_no = ' . $bNo;
 	//틀리다면 메시지 출력 후 이전화면으로
+
 	} else {
-		$msg = '비밀번호가 맞지 않습니다.';
-	?>
-		<script>
-			alert("<?php echo $msg?>");
-			history.back();
-		</script>
-	<?php
-		exit;
-	}
+
+        $sql = 'delete from board_free where b_no = ' . $bNo;
+        //틀리다면 메시지 출력 후 이전화면으로
+
+    }
 }
 
 	$result = $db->query($sql);

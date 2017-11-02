@@ -1,6 +1,7 @@
-﻿<?php
+﻿﻿﻿﻿<?php
 	require_once('../dbconfig.php');
-	
+	include "../include/session.php";
+
 	$w = '';
 	$coNo = 'null';
 	
@@ -23,7 +24,7 @@
 	
 	if(empty($w) || $w === 'w') { //$w 변수가 비어있거나 w인 경우
 		$msg = '작성';
-		$sql = 'insert into comment_free values(null, ' .$bNo . ', ' . $coNo . ', "' . $coContent . '", "' . $coId . '", password("' . $coPassword . '"))';
+		$sql = 'insert into comment_free values(null, ' .$bNo . ', ' . $coNo . ', "' . $coContent . '", "' . $_SESSION['ses_userName'] . '", password("' . $coPassword . '"))';
 
 		
 		if(empty($w)) { //$w 변수가 비어있다면,
@@ -59,16 +60,16 @@
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		
-		if(empty($row['cnt'])) { //맞는 결과가 없을 경우 종료
-?>
-			<script>
-				alert('비밀번호가 맞지 않습니다.');
-				history.back();
-			</script>
-<?php 
-			exit;	
-		}
-		$sql = 'delete from comment_free where co_password=password("' . $coPassword . '") and co_no = ' . $coNo;
+//		if(empty($row['cnt'])) { //맞는 결과가 없을 경우 종료
+//?>
+<!--			<script>-->
+<!--				alert('비밀번호가 맞지 않습니다.');-->
+<!--				history.back();-->
+<!--			</script>-->
+<?php
+//			exit;
+//		}
+		$sql = 'delete from comment_free where co_no = ' . $coNo;
 
 	} else {
 ?>

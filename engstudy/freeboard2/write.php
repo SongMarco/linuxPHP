@@ -40,17 +40,18 @@
 							<th scope="row"><label for="bID">아이디</label></th>
 							<td class="id">
 								<?php
-								if(isset($bNo)) {
-									echo $row['b_id'];
-								} else { ?>
-									<input type="text" name="bID" id="bID">
-								<?php } ?>
+
+                                include "../include/session.php";
+
+                                echo $_SESSION['ses_userName'];
+//								if(isset($bNo)) {
+//									echo $row['b_id'];
+//								} else { ?>
+<!--									<input type="text" name="bID" id="bID">-->
+<!--								--><?php //} ?>
 							</td>
 						</tr>
-						<tr>
-							<th scope="row"><label for="bPassword">비밀번호</label></th>
-							<td class="password"><input type="password" name="bPassword" id="bPassword"></td>
-						</tr>
+
 						<tr>
 							<th scope="row"><label for="bTitle">제목</label></th>
 							<td class="title"><input type="text" name="bTitle" id="bTitle" value="<?php echo isset($row['b_title'])?$row['b_title']:null?>"></td>

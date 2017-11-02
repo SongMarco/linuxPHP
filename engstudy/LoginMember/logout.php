@@ -17,8 +17,6 @@ if($_SESSION['ses_userid'] == null){
 //
 //    header("location:".$prevPage);
     // prevpage는 이전 페이지! index.php or freeboard -> index.php에서 가져온다
-    //그냥 히스토리 백으로 뒤로가기 처리하면되지~
-
-    echo "<script>history.back();</script>";
+    echo "<script>history.go(-1);</script>";
 }
 ?>

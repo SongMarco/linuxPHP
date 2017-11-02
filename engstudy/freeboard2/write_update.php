@@ -1,6 +1,7 @@
 <?php
 	require_once("../dbconfig.php");
 
+	include "../include/session.php";
 	//$_POST['bno']이 있을 때만 $bno 선언
 	if(isset($_POST['bno'])) {
 		$bNo = $_POST['bno'];
@@ -30,19 +31,13 @@ if(isset($bNo)) {
 		$msgState = '수정';
 	//틀리다면 메시지 출력 후 이전화면으로
 	} else {
-		$msg = '비밀번호가 맞지 않습니다.';
-	?>
-		<script>
-			alert("<?php echo $msg?>");
-			history.back();
-		</script>
-	<?php
-		exit;
+        $sql = 'update board_free set b_title="' . $bTitle . '", b_content="' . $bContent . '" where b_no = ' . $bNo;
+        $msgState = '수정';
 	}
 	
 //글 등록
 } else {
-	$sql = 'insert into board_free (b_no, b_title, b_content, b_date, b_hit, b_id, b_password) values(null, "' . $bTitle . '", "' . $bContent . '", "' . $date . '", 0, "' . $bID . '", password("' . $bPassword . '"))';
+	$sql = 'insert into board_free (b_no, b_title, b_content, b_date, b_hit, b_id) values(null, "' . $bTitle . '", "' . $bContent . '", "' . $date . '", 0 ,"' . $_SESSION['ses_userName'] . '" )';
 	$msgState = '등록';
 }
 

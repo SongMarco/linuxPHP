@@ -4,11 +4,35 @@ $result = $db->query($sql);
 ?>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
+
 <div id="commentView">
-    <form action="comment_update.php" method="post">
+
+
+
+    <form action="comment_update.php" method="post" onsubmit="return validate(this);">
+        <script>
+                function validate(form) {
+
+                // validation code here ...
+
+                if(action == 'd'){
+                confirm('정말 댓글을 삭제하시겠습니까?');
+                }
+
+//                if(action == 'w'){
+//                alert('쓰기를 눌렀어요 ');
+//                }
+//                if(action == 'u'){
+//                alert('수정을 눌렀어요 ');
+//                }
+
+                }
+        </script>
+
+
         <input type="hidden" name="bno" value="<?php echo $bNo?>">
         <?php
-        while($row = $result->fetch_assoc()) {
+        while($row = $result->fetch_assoc() ) {
             ?>
             <ul class="oneDepth">
                 <li>
@@ -27,8 +51,13 @@ $result = $db->query($sql);
 
                                 }
 
-                                else{
+                                // 로그인은 되있지만 다른 회원이다.
+                                else if($_SESSION['ses_userName']){
                                     echo "<a href=\"#\" class=\"comt write\">댓글</a>";
+                                }
+                                //로그인도 안되있다.
+                                else{
+
                                 }
 
                                 ?>
@@ -83,28 +112,81 @@ $result = $db->query($sql);
     <input type="hidden" name="bno" value="<?php echo $bNo?>">
     <table>
         <tbody>
-        <tr>
-            <th scope="row"><label for="coId">아이디</label></th>
-            <td><input type="text" name="coId" id="coId"></td>
-        </tr>
-        <tr>
-            <th scope="row">
-                <label for="coPassword">비밀번호</label></th>
-            <td><input type="password" name="coPassword" id="coPassword"></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="coContent">내용</label></th>
-            <td><textarea name="coContent" id="coContent"></textarea></td>
-        </tr>
+
+        <?php
+
+        include "../include/session.php";
+
+        //로그인 되있다면 글쓰기가 가능하다.
+        if($_SESSION['ses_userName']){
+
+            echo "<tr>
+            <th scope=\"row\"><label for=\"coContent\">내용</label></th>
+            <td><textarea name=\"coContent\" id=\"coContent\"></textarea></td>
+        </tr>";
+        }
+
+        //로그인이 안되었다. 글쓰기 누르면 알림창 띄우고 로그인 창으로.
+        else {
+
+
+
+            ?>
+
+        <a href="javascript:onClick=writeConfirm()" >글쓰기</a>
+            <tr>
+                <th scope="row"><label for="coContent"></label></th>
+                <td style="text-align: right">댓글을 달려면 로그인하세요</td>
+            </tr>
+        <?php
+
+        }
+
+        ?>
+
+
+
         </tbody>
     </table>
     <div class="btnSet">
 
-        <input type="submit" value="댓글 쓰기">
+
+        <?php
+
+        include "../include/session.php";
+
+
+        //로그인 되있다면 글쓰기가 가능하다.
+        if($_SESSION['ses_userName']){
+
+            echo "<input class='btn btn-primary' type=\"submit\" value=\"댓글 쓰기\">";
+        }
+
+        //로그인이 안되었다. 글쓰기 누르면 알림창 띄우고 로그인 창으로.
+        else {
+//            echo "<a class='btn btn-primary' href=\"javascript:onClick=writeConfirm()\"  >로그인</a>";
+
+            echo "<a class='btn btn-primary' href=\"../LoginMember\"  >로그인</a>";
+        }
+
+        ?>
+        <!--                writePermission 은 확인 / 취소가 있다. 컨펌임! 반면에 writeAlert는 확인만 있는 alert!-->
+        <script>
+            function writeConfirm(){
+                if( confirm("사이트 회원만 댓글을 쓸 수 있습니다. 로그인 창으로 이동합니다." ) ){
+                    location.href="../LoginMember";
+                }
+            }
+        </script>
+
+
+
+
     </div>
 </form>
 
 <script>
+
     $(document).ready(function () {
         var commentSet = '';
         var action = '';
@@ -112,6 +194,7 @@ $result = $db->query($sql);
             //현재 작성 내용을 변수에 넣고, active 클래스 추가.
             commentSet = $(this).parents('.commentSet').html();
             $(this).parents('.commentSet').addClass('active');
+
 
             //취소 버튼
             var commentBtn = '<a href="#" class="addComt cancel">취소</a>';
@@ -155,43 +238,66 @@ $result = $db->query($sql);
 
             }
 
+
+
+
             comment += '<div class="writeComment">';
             comment += '	<input type="hidden" name="w" value="' + action + '">';
             comment += addOption;
             comment += '	<table>';
             comment += '		<tbody>';
             if(action !== 'd') {
-                comment += '			<tr>';
-                comment += '				<th scope="row"><label for="coId">아이디</label></th>';
-                comment += '				<td>' + coId + '</td>';
-                comment += '			</tr>';
+//                comment += '			<tr>';
+//                comment += '				<th scope="row"><label for="coId">아이디</label></th>';
+//                comment += '				<td>' + coId + '</td>';
+//                comment += '			</tr>';
             }
-            comment += '			<tr>';
-            comment += '				<th scope="row">';
-            comment += '			<label for="coPassword">비밀번호</label></th>';
-            comment += '				<td><input type="password" name="coPassword" id="coPassword"></td>';
-            comment += '			</tr>';
+//            comment += '			<tr>';
+////            comment += '				<th scope="row">';
+////            comment += '			<label for="coPassword">비밀번호</label></th>';
+////            comment += '				<td><input type="password" name="coPassword" id="coPassword"></td>';
+//            comment += '			</tr>';
             if(action !== 'd') {
                 comment += '			<tr>';
                 comment += '				<th scope="row"><label for="coContent">내용</label></th>';
                 comment += '				<td><textarea name="coContent" id="coContent">' + coContent + '</textarea></td>';
                 comment += '			</tr>';
             }
-            comment += '		</tbody>';
-            comment += '	</table>';
-            comment += '	<div class="btnSet">';
-            comment += '		<input type="submit" value="확인">';
-            comment += '	</div>';
-            comment += '</div>';
+
+
+            if(action !== 'd'){
+                comment += '		</tbody>';
+                comment += '	</table>';
+                comment += '	<div class="btnSet">';
+                comment += '		<input type="submit" value="확인">';
+                comment += '	</div>';
+                comment += '</div>';
+            }
+            else{
+                comment += '		</tbody>';
+                comment += '	</table>';
+                comment += '	<div class="btnSet">';
+                comment += '<?php echo "정말 삭제하시겠습니까?" ?>';
+                comment += '		<input type="submit" value="삭제">';
+                comment += '	</div>';
+                comment += '</div>';
+            }
+
+
 
             $(this).parents('.commentSet').after(comment);
             return false;
         });
 
+
+
         $('#commentView').delegate(".cancel", "click", function () {
             if(action == 'w') {
                 $('.writeComment').remove();
             } else if(action == 'u') {
+                $('.writeComment').remove();
+            }
+            else{
                 $('.writeComment').remove();
             }
             $('.commentSet.active').removeClass('active');
@@ -200,4 +306,6 @@ $result = $db->query($sql);
             return false;
         });
     });
+
+
 </script>
