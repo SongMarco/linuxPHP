@@ -41,7 +41,18 @@
             </div>
 
             <div class="form-group text-center">
+
+                <div style="float: right;">
+                    <label  class="UICheckbox">
+                        <input type="checkbox"  name="auto_login" value="on">
+
+                        <span class="UICheckbox-label">로그인 유지</span>
+                    </label>
+                </div>
+
               <button type="submit" class="btn btn-info">로그인<i class="fa fa-check spaceLeft"></i></button>
+
+
 
               <!--<button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button>-->
             </div>

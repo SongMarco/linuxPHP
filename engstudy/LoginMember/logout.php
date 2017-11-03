@@ -10,8 +10,13 @@ unset($_SESSION['ses_userEmail']);
 unset($_SESSION['log_status']);
 
 
-if($_SESSION['ses_userid'] == null){
+session_unset();     // 현재 연결된 세션에 등록되어 있는 모든 변수의 값을 삭제한다
+
+
+if(session_destroy()){
     echo '로그아웃 완료 ';
+
+
 
 
 //

@@ -14,7 +14,7 @@ if(!empty($bNo) && empty($_COOKIE['board_free_' . $bNo])) {
         </script>
         <?php
     } else {
-        setcookie('board_free_' . $bNo, TRUE, time() + (60 * 60 * 24), '/');
+        setcookie('bo   ard_free_' . $bNo, TRUE, time() + (60 * 60 * 24), '/');
     }
 }
 

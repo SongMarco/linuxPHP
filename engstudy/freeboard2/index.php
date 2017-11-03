@@ -107,6 +107,8 @@
 		$sql = 'select * from board_free' . $searchSql . ' order by b_no desc' . $sqlLimit; //원하는 개수만큼 가져온다. (0번째부터 20번째까지
 		$result = $db->query($sql);
 	}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -130,36 +132,39 @@
 </head>
 
 <body>
+
+
 <div style="text-align: right">
 
     <?php
     include "../include/session.php";
-    $prevPage = $_SERVER["HTTP_REFERER"];
+
 //    echo $prevPage;
 
 
     if($_SESSION['ses_userName']){
 
-        echo $_SESSION['ses_userName'].'님 환영합니다.';
+        echo $_SESSION['ses_userName'].'님 환영합니다. ';
+        echo "자동 로그인".$_COOKIE['auto_login'];
     }
 
 
     ?>
-
-    <p>Hello</p>
-    <a href="#">Click to hide me</a>
-    <p>Here is another paragraph</p>
-    <script> $("p").hide();
-
-
-
-
-        $("a").click(function ( event ) {
-            event.preventDefault();
-            $(this).hide();
-        });
-
-    </script>
+<!---->
+<!--    <p>Hello</p>-->
+<!--    <a href="#">Click to hide me</a>-->
+<!--    <p>Here is another paragraph</p>-->
+<!--    <script> $("p").hide();-->
+<!---->
+<!---->
+<!---->
+<!---->
+<!--        $("a").click(function ( event ) {-->
+<!--            event.preventDefault();-->
+<!--            $(this).hide();-->
+<!--        });-->
+<!---->
+<!--    </script>-->
 
 
 </div>
@@ -189,32 +194,32 @@
                 </form>
 
                 <div>
-                    <a id="join" class="btn btn-primary navbar-btn navbar-right" role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                    <a id="login" class="btn btn-primary navbar-btn navbar-right" role="button" href="../LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
-                    <a id="logout" class="btn btn-primary navbar-btn navbar-right" role="button" href="../LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
-
-                    <script>
-
-                        var is_logged_in = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
-
-                        if (is_logged_in) {
-
-                            document.getElementById('join').style.display='none';
-                            document.getElementById('login').style.display='none';
-                            //your code..$(".class or #id").addClass("xyz");//show,hide or any appropriate action
-                        } else {
-
-                            document.getElementById('logout').style.display='none';
-                        }
 
 
-                        //                        $("a").click(function ( event ) {
-                        //                            event.preventDefault();
-                        //                            $(this).hide();
-                        //                        });
 
 
-                    </script>
+                    <?php
+
+                    // 세션의 닉네임과 글쓴이 이름이 같으면 수정 삭제 가능.
+                    // php 안에 html 넣으려면 에코를 쓰면 된다 @@@
+                    if( isset($_SESSION['ses_userName']) ){
+                        ?>
+                        <a id="logout" class="btn btn-primary navbar-btn navbar-right" role="button" href="../LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+
+                    <?php
+
+                    }
+                    else{
+
+                        ?>
+                        <a id="join" class="btn btn-primary navbar-btn navbar-right" role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
+                        <a id="login" class="btn btn-primary navbar-btn navbar-right" role="button" href="../LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+
+                    <?php
+
+
+                    }
+                    ?>
 
                 </div>
               </div>
@@ -244,7 +249,9 @@
 						<?php
 						if(isset($emptyData)) {
 							echo $emptyData;
-						} else {
+						}
+						else
+                        {
 							while($row = $result->fetch_assoc())
 							{
 								$datetime = explode(' ', $row['b_date']);

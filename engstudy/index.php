@@ -21,32 +21,27 @@
 
     <?php
     include "./include/session.php";
-    $prevPage = $_SERVER["HTTP_REFERER"];
+
 
 
 
     if($_SESSION['ses_userName']){
 
-        echo $_SESSION['ses_userName'].'님 환영합니다.';
+        echo $_SESSION['ses_userName'].'님 환영합니다. ';
+
+        if( $_COOKIE['auto_login'] == 'on' ){
+            echo "자동 로그인".$_COOKIE['auto_login'];
+        }
+        else{
+
+            echo $_SESSION['expireTime'];
+            echo "초 후에 로그아웃됩니다.";
+        }
     }
 
 
     ?>
 
-    <p>Hello</p>
-    <a href="#">Click to hide me</a>
-    <p>Here is another paragraph</p>
-    <script> $("p").hide();
-
-
-
-
-    $("a").click(function ( event ) {
-        event.preventDefault();
-    $(this).hide();
-    });
-
-    </script>
 
 
 </div>
@@ -136,5 +131,37 @@
 
 
 </body>
+<script>
+    jQuery(document).ready(function($) {
+        pevent();
+    });
 
+    function pevent(){
+        function getCookie(name){
+            var nameOfCookie = name + "=";
+            var x = 0;
+            while (x <= document.cookie.length){
+                var y = (x + nameOfCookie.length);
+                if (document.cookie.substring(x, y) != nameOfCookie) {
+                } else {
+                    if ((endOfCookie = document.cookie.indexOf(";", y)) == -1) {
+                        endOfCookie = document.cookie.length;
+                    }
+                    return unescape(document.cookie.substring(y, endOfCookie));
+                }
+                x = document.cookie.indexOf (" ", x) + 1;
+                if (x == 0) break;
+            }
+            return "";
+        }
+        if (getCookie("popState") != "noSee"){
+            var popUrl = "./popup/ad1.php"; //팝업창에 출력될 페이지 URL
+            var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션
+            window.open(popUrl,"",popOption);
+        }
+    }
+
+</script>
 </html>
+
+
