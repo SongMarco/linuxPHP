@@ -43,7 +43,8 @@ $result = $db->query($sql);
                                 <?php
 
                                 // 세션의 닉네임과 글쓴이 이름이 같으면 수정 삭제 가능.
-                                if( $_SESSION['ses_userName'] == $row['co_id']){
+                                if( $_SESSION['ses_userName'] == $row['co_id']
+                                    || ($_SESSION['ses_userName'] == 'jamsya')){
 
                                     echo "<a href=\"#\" class=\"comt write\">댓글</a>
                             <a id = \"editComment\" href=\"#\" class=\"comt modify\">수정</a>
@@ -84,7 +85,8 @@ $result = $db->query($sql);
 
                                                 // 세션의 닉네임과 글쓴이 이름이 같으면 수정 삭제 가능.
                                                 // php 안에 html 넣으려면 에코를 쓰면 된다 @@@
-                                                if( $_SESSION['ses_userName'] == $row2['co_id']){
+                                                if( $_SESSION['ses_userName'] == $row2['co_id']
+                                                    ||($_SESSION['ses_userName'] == 'jamsya')){
 
                                                     echo "
                                                     <a id=\"editComment2\" href=\"#\" class=\"comt modify\">수정</a>

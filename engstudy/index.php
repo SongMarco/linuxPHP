@@ -27,7 +27,13 @@
 
     if($_SESSION['ses_userName']){
 
-        echo $_SESSION['ses_userName'].'님 환영합니다. ';
+        if($_SESSION['ses_userName'] !== 'jamsya'){
+            echo $_SESSION['ses_userName'].'님 환영합니다. ';
+        }
+        else{
+            echo "관리자 계정입니다. ".$_SESSION['ses_userName'].'님 환영합니다. ';
+        }
+
 
         if( $_COOKIE['auto_login'] == 'on' ){
             echo "자동 로그인".$_COOKIE['auto_login'];
@@ -56,23 +62,32 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav">
                         <li class="active" role="presentation"><a href="index.php">홈 </a></li>
-                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>
+<!--                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>-->
                         <li role="presentation"><a href="./freeboard2">자유게시판 </a></li>
                         <li role="presentation"><a href="contact.php">문의하기 </a></li>
+<!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
                     </ul>
                     <form action = "./search.php" class="navbar-form navbar-left" target="_self" method="get">
                         <div class="form-group">
                             <label class="control-label" for="search-field">Typo 검색</label>
                             <input class="form-control search-field" type="search" name="searchWord" id="search-field">
                         </div>
+
                         <button class="btn btn-primary" type="submit" style="background-color:rgb(75,84,75);"> <i class="glyphicon glyphicon-search"></i></button>
                     </form>
 
+                    <ul class="nav navbar-nav">
+
+                        <li ><a href="./recent">최근검색 </a></li>
+                        <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
+                    </ul>
+
 
                     <div>
-                    <a id="join" class="btn btn-primary navbar-btn navbar-right" role="button" href="joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                    <a id="login" class="btn btn-primary navbar-btn navbar-right" role="button" href="./LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
-                    <a id="logout" class="btn btn-primary navbar-btn navbar-right" role="button" href="./LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+
+                        <a id="login" class="btn btn-primary navbar-btn " role="button" href="./LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+                    <a id="join" class="btn btn-primary navbar-btn " role="button" href="joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
+                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="./LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
 
                         <script>
 

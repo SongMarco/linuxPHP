@@ -63,6 +63,30 @@
                     echo "$searchWord ";
                     echo "$searchKor ";
                     echo "<br>";
+
+            include "./include/dbConnect.php";
+
+            $searchWord = $_GET['searchWord'];
+
+            //쿠키값이 없을 경우 즉 처음 저장하는 경우
+            if($_COOKIE['recent_search']==""){
+                setcookie('recent_search', $searchWord. " : ". $searchKor, time() + 86400, "/");
+            }
+            //저장된 쿠키값이 존재하고, 중복된 값이 아닌 경우
+            else if($_COOKIE['recent_search'] != "" ){
+                setcookie('recent_search' , $_COOKIE['recent_search']. "," . $searchWord. " : ". $searchKor
+                    , time() + 86400, "/");
+            }
+
+//            $recent_arr = explode(",",$_COOKIE['recent_search']);
+//            print_r($recent_arr);
+            ?>
+        <script>
+            alert(document.cookie);
+
+        </script>
+                    <?php
+
                 }
             }
             ?>

@@ -32,19 +32,18 @@ $row = $result->fetch_assoc();
     <script src="./js/jquery-2.1.3.min.js"></script>\
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="ht tps://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 
 
 
-    <style> .centered { display: table; margin-left: auto; margin-right: auto; }
-    </style>
+
 </head>
 <body>
 
 
 <!--가운데 정렬하는법. 클래스 = 센터드를 추가해주었다. 위에 헤더에 스타일 - 센터드도 있음. 참고! -->
-<div class="centered">
+<div class="centered ridge">
 <article >
     <h3 style="text-align: center">자유게시판</h3>
 
@@ -69,10 +68,23 @@ $row = $result->fetch_assoc();
 <!--                onsubmit="return validate(this)"-->
                 <input type="hidden" name="bno" value="<?php echo $bNo?>">
 
-            <a id = "edit" href="./write.php?bno=<?php echo $bNo?>">수정</a>
-<!--            <a id = "del" href="./delete.php?bno=--><?php //echo $bNo?><!--">삭제</a>-->
-            <a id = "del" href="javascript:onClick=deleteConfirm()">삭제</a>
-            <a href="javascript:onClick=deleteConfirm()" >글쓰기</a>
+
+
+                <?php
+
+
+                //유저이름이 작성자이거나, 운영자의 아이디면 수정삭제 가능.
+                if(($_SESSION['ses_userName'] == $row['b_id']) || ($_SESSION['ses_userName'] == 'jamsya') ){
+                    ?>
+                    <a id = "edit" href="./write.php?bno=<?php echo $bNo?>">수정</a>
+
+                    <a id = "del" href="javascript:onClick=deleteConfirm()">삭제</a>
+                    <?php
+                }
+
+                ?>
+
+                <a href="javascript:onClick=deleteConfirm()" >글쓰기</a>
 
 
 <!--                <script>-->
@@ -110,26 +122,14 @@ $row = $result->fetch_assoc();
             <a id = "list" href="./">목록</a>
 
             </form>
-            <script>
-
-//              본 스크립트를 적용하려면 헤드를 손봐야 한다!! 헤드에 <script src="http://code.jquery.com/jquery-latest.js"> 확인하기
-//              php 파일에 세션도 포함시켜야 한다.(세션스타트!!)
-                var ses_userName = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
-                var writerName = "<?php echo $row['b_id']?>";
-                // 세션의 닉네임과 글쓴이가 동일하다면 -> 수정, 삭제를 보이게 해라.(아무것도 안함. 다 보임)
-                if (ses_userName ==  writerName ) {
 
 
-                }
-                // 세션의 닉네임과 글쓴이가 다르다 -> 수정 삭제를 감춘다!
-                else {
-
-                    document.getElementById('edit').style.display='none';
-                    document.getElementById('del').style.display='none';
-                }
 
 
-            </script>
+
+
+
+
         </div>
         <div id="boardComment">
 

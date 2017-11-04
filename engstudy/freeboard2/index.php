@@ -141,11 +141,24 @@
 
 //    echo $prevPage;
 
-
     if($_SESSION['ses_userName']){
 
-        echo $_SESSION['ses_userName'].'님 환영합니다. ';
-        echo "자동 로그인".$_COOKIE['auto_login'];
+        if($_SESSION['ses_userName'] !== 'jamsya'){
+            echo $_SESSION['ses_userName'].'님 환영합니다. ';
+        }
+        else{
+            echo "관리자 계정입니다. ".$_SESSION['ses_userName'].'님 환영합니다. ';
+        }
+
+
+        if( $_COOKIE['auto_login'] == 'on' ){
+            echo "자동 로그인".$_COOKIE['auto_login'];
+        }
+        else{
+
+            echo $_SESSION['expireTime'];
+            echo "초 후에 로그아웃됩니다.";
+        }
     }
 
 
@@ -174,7 +187,7 @@
 
     <nav class="navbar navbar-default">
         <div class="container">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="../index.php" style="font-family:ABeeZee, sans-serif;">TYPOTIONARY </a>
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php" style="font-family:ABeeZee, sans-serif;">TYPOTIONARY </a>
                 <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -184,7 +197,6 @@
                     <li class="active" role="presentation"><a href="../freeboard2">자유게시판 </a></li>
                     <li role="presentation"><a href="../contact.php">문의하기 </a></li>
                 </ul>
-
                 <form action = "../search.php" class="navbar-form navbar-left" target="_self" method="get">
                     <div class="form-group">
                         <label class="control-label" for="search-field">Typo 검색</label>
@@ -193,36 +205,40 @@
                     <button class="btn btn-primary" type="submit" style="background-color:rgb(75,84,75);"> <i class="glyphicon glyphicon-search"></i></button>
                 </form>
 
+
                 <div>
+                    <a id="login" class="btn btn-primary navbar-btn" role="button" href="../LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+
+                    <a id="join" class="btn btn-primary navbar-btn " role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
+
+                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="../LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+
+                    <script>
+
+                        var is_logged_in = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
+
+                        if (is_logged_in) {
+
+                            document.getElementById('join').style.display='none';
+                            document.getElementById('login').style.display='none';
+                            //your code..$(".class or #id").addClass("xyz");//show,hide or any appropriate action
+                        } else {
+
+                            document.getElementById('logout').style.display='none';
+                        }
 
 
+                        //                        $("a").click(function ( event ) {
+                        //                            event.preventDefault();
+                        //                            $(this).hide();
+                        //                        });
 
 
-                    <?php
-
-                    // 세션의 닉네임과 글쓴이 이름이 같으면 수정 삭제 가능.
-                    // php 안에 html 넣으려면 에코를 쓰면 된다 @@@
-                    if( isset($_SESSION['ses_userName']) ){
-                        ?>
-                        <a id="logout" class="btn btn-primary navbar-btn navbar-right" role="button" href="../LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
-
-                    <?php
-
-                    }
-                    else{
-
-                        ?>
-                        <a id="join" class="btn btn-primary navbar-btn navbar-right" role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                        <a id="login" class="btn btn-primary navbar-btn navbar-right" role="button" href="../LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
-
-                    <?php
-
-
-                    }
-                    ?>
+                    </script>
 
                 </div>
-              </div>
+            </div>
+        </div>
     </nav>
 </div>
 

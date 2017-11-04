@@ -44,11 +44,27 @@
 
                 <div style="float: right;">
                     <label  class="UICheckbox">
-                        <input type="checkbox"  name="auto_login" value="on">
+                        <input type="checkbox"  name="auto_login" value="on" onclick="checkFunc(this)">
 
                         <span class="UICheckbox-label">로그인 유지</span>
                     </label>
                 </div>
+
+                <script>
+                    function checkFunc(chkbox)
+                    {
+                        if ( chkbox.checked == true )
+                        {
+                            alert("자동 로그인은 개인용 PC에서만 사용하시기 바랍니다.");
+                        }
+//                        else
+//                        {
+//                            alert("선택 해제");
+//                        }
+                    }
+
+
+                </script>
 
               <button type="submit" class="btn btn-info">로그인<i class="fa fa-check spaceLeft"></i></button>
 
