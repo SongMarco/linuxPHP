@@ -1,6 +1,12 @@
 <?php
 
-	require_once("../dbconfig.php");
+require_once("../dbconfig.php");
+
+include "../include/session.php";
+
+
+
+
 
 	//$_GET['bno']이 있을 때만 $bno 선언
 	if(isset($_GET['bno'])) {
@@ -12,6 +18,19 @@
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 	}
+
+
+if(isset($bNo)) {
+
+    if(($_SESSION['ses_userName'] !== $row['b_id']) &&($_SESSION['ses_userName'] !== 'jamsya') ){
+
+        echo "<script>
+                                        alert(\"작성자만 글 수정이 가능합니다.\");
+                                        history.go(-1);
+                                        </script>";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,14 +60,20 @@
 							<td class="id">
 								<?php
 
-                                include "../include/session.php";
 
-                                echo $_SESSION['ses_userName'];
-//								if(isset($bNo)) {
-//									echo $row['b_id'];
-//								} else { ?>
-<!--									<input type="text" name="bID" id="bID">-->
-<!--								--><?php //} ?>
+
+//
+//                                echo $_SESSION['ses_userName'];
+								if(isset($bNo)) {
+
+
+
+
+
+									echo $row['b_id'];
+								} else {
+                                    echo $_SESSION['ses_userName'];
+								 } ?>
 							</td>
 						</tr>
 

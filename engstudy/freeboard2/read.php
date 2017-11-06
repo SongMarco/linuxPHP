@@ -84,7 +84,7 @@ $row = $result->fetch_assoc();
 
                 ?>
 
-                <a href="javascript:onClick=deleteConfirm()" >글쓰기</a>
+
 
 
 <!--                <script>-->

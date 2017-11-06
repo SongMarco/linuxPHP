@@ -28,9 +28,9 @@
         <div class="page-header">
           <h1 style="text-align: center">로그인 </h1>
         </div>
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-119 ">
           <form role="form" action="./signIn.php" method="post" onsubmit="return checkSubmit()">
-            <div class="form-group">
+            <div class="form-group ">
               <label for="InputEmail">이메일 주소</label>
               <input type="email" class="form-control" name="InputEmail" id="InputEmail" placeholder="이메일 주소">
 
@@ -42,13 +42,7 @@
 
             <div class="form-group text-center">
 
-                <div style="float: right;">
-                    <label  class="UICheckbox">
-                        <input type="checkbox"  name="auto_login" value="on" onclick="checkFunc(this)">
 
-                        <span class="UICheckbox-label">로그인 유지</span>
-                    </label>
-                </div>
 
                 <script>
                     function checkFunc(chkbox)
@@ -66,16 +60,23 @@
 
                 </script>
 
-              <button type="submit" class="btn btn-info">로그인<i class="fa fa-check spaceLeft"></i></button>
+              <button type="submit" class="btn btn-info btn-block">로그인<i class="fa fa-check spaceLeft"></i></button>
 
 
 
               <!--<button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button>-->
             </div>
+              <div style="padding-bottom: 10px;border-bottom: 1px solid gainsboro; margin-bottom: 20px; " >
+                  <label  class="UICheckbox">
+                      <input type="checkbox"  name="auto_login" value="on" onclick="checkFunc(this)">
+
+                      <span class="UICheckbox-label">로그인 상태 유지</span>
+                  </label>
+              </div>
 
             <div class="form-group text-center">
 
-              <a class="btn btn-primary" role="button" href="../joinMember">회원가입</a>
+              <a class="btn btn-primary btn-block" role="button" href="../joinMember">회원가입</a>
               <!--<button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button>-->
             </div>
           </form>
