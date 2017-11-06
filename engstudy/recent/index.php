@@ -62,7 +62,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li  role="presentation"><a href="../index.php">홈 </a></li>
-<!--                    <li role="presentation"><a href="../guide.php">활용 가이드 </a></li>-->
+                    <!--                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>-->
                     <li role="presentation"><a href="../freeboard2">자유게시판 </a></li>
                     <li role="presentation"><a href="../contact.php">문의하기 </a></li>
                     <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
@@ -78,16 +78,16 @@
 
                 <ul class="nav navbar-nav">
 
-                    <li class="active" role="presentation"><a href="./">최근검색</a></li>
+                    <li role="presentation" class="active" ><a href="../recent">최근검색 </a></li>
                     <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
                 </ul>
 
 
                 <div>
 
-                    <a id="login" class="btn btn-primary navbar-btn " role="button" href="../LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+                    <a id="login" class="btn btn-primary navbar-btn " role="button" href="../LoginMember" style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
                     <a id="join" class="btn btn-primary navbar-btn " role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="../LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="../LoginMember/logout.php" style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
 
                     <script>
 
@@ -118,8 +118,7 @@
     </nav>
 </div>
 
-
-<div class="container" style="padding:134px;">
+<div class="container" style="padding:100px;">
 
     <?php
 
