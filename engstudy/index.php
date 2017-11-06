@@ -85,9 +85,9 @@
 
                     <div>
 
-                        <a id="login" class="btn btn-primary navbar-btn " role="button" href="./LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+                        <a id="login" class="btn btn-primary navbar-btn " role="button" href="./LoginMember" style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
                     <a id="join" class="btn btn-primary navbar-btn " role="button" href="joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="./LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="./LoginMember/logout.php" style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
 
                         <script>
 

@@ -132,14 +132,13 @@
 </head>
 
 <body>
-
-
 <div style="text-align: right">
 
     <?php
     include "../include/session.php";
 
-//    echo $prevPage;
+
+
 
     if($_SESSION['ses_userName']){
 
@@ -163,28 +162,13 @@
 
 
     ?>
-<!---->
-<!--    <p>Hello</p>-->
-<!--    <a href="#">Click to hide me</a>-->
-<!--    <p>Here is another paragraph</p>-->
-<!--    <script> $("p").hide();-->
-<!---->
-<!---->
-<!---->
-<!---->
-<!--        $("a").click(function ( event ) {-->
-<!--            event.preventDefault();-->
-<!--            $(this).hide();-->
-<!--        });-->
-<!---->
-<!--    </script>-->
+
 
 
 </div>
 
+
 <div>
-
-
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php" style="font-family:ABeeZee, sans-serif;">TYPOTIONARY </a>
@@ -193,25 +177,32 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li  role="presentation"><a href="../index.php">홈 </a></li>
-                    <li role="presentation"><a href="../guide.php">활용 가이드 </a></li>
+                    <!--                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>-->
                     <li class="active" role="presentation"><a href="../freeboard2">자유게시판 </a></li>
                     <li role="presentation"><a href="../contact.php">문의하기 </a></li>
+                    <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
                 </ul>
                 <form action = "../search.php" class="navbar-form navbar-left" target="_self" method="get">
                     <div class="form-group">
                         <label class="control-label" for="search-field">Typo 검색</label>
                         <input class="form-control search-field" type="search" name="searchWord" id="search-field">
                     </div>
+
                     <button class="btn btn-primary" type="submit" style="background-color:rgb(75,84,75);"> <i class="glyphicon glyphicon-search"></i></button>
                 </form>
 
+                <ul class="nav navbar-nav">
+
+                    <li ><a href="../recent">최근검색 </a></li>
+                    <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
+                </ul>
+
 
                 <div>
-                    <a id="login" class="btn btn-primary navbar-btn" role="button" href="../LoginMember"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
 
+                    <a id="login" class="btn btn-primary navbar-btn " role="button" href="../LoginMember" style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
                     <a id="join" class="btn btn-primary navbar-btn " role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-
-                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="../LoginMember/logout.php"style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="../LoginMember/logout.php" style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
 
                     <script>
 
@@ -241,7 +232,6 @@
         </div>
     </nav>
 </div>
-
 <div class="outer">
 	<article class="boardArticle; inner">
         <div style="text-align: center"><h3 >자유게시판</h3></div>
