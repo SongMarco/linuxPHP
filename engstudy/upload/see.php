@@ -7,7 +7,7 @@ $row = $result->fetch_assoc();
 $result = $db->query("select * from test_image where bbsNo=".$bbsno);
 $row2 = $result->fetch_assoc();
 ?>
-<html>
+<html xmlns:height="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>게시물 보기</title>
@@ -34,15 +34,26 @@ $row2 = $result->fetch_assoc();
 	<td>이미지</td>
 	<td>
 <?php
-if(!empty($row2))
-	echo "<img src='".$row2['path']."/".$row2['filename']."' />";
+if(!empty($row2)){
+//    echo "<img src='".$row2['path']."/".$row2['filename']."' style=\"max-width: 70%; height: auto;\" />";
+
+	?>
+    <img src='<?php echo $row2['path']."/".$row2['filename']?>' style="width: 60%; height: auto;" />
+
+    <?php
+
+
+}
 else
 	echo "이미지 없음";
+
 ?>
+
 	</td>
 </tr>
 </table>
 
 <p><a href='index.php'>목록가기</a></p>
+
 </body>
 </html>
