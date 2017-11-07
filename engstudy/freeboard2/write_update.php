@@ -1,7 +1,9 @@
 <?php
-	require_once("../dbconfig.php");
+	include"../dbconfig.php";
 
 	include "../include/session.php";
+//ini_set("display_errors", 1);
+
 	//$_POST['bno']이 있을 때만 $bno 선언
 	if(isset($_POST['bno'])) {
 		$bNo = $_POST['bno'];
@@ -17,6 +19,8 @@
 	$bPassword = $_POST['bPassword'];
 	$bTitle = $_POST['bTitle'];
 	$bContent = $_POST['bContent'];
+
+	$imgresult; $move;
 
 //글 수정
 if(isset($bNo)) {
@@ -39,6 +43,9 @@ if(isset($bNo)) {
 } else {
 	$sql = 'insert into board_free (b_no, b_title, b_content, b_date, b_hit, b_id) values(null, "' . $bTitle . '", "' . $bContent . '", "' . $date . '", 0 ,"' . $_SESSION['ses_userName'] . '" )';
 	$msgState = '등록';
+
+
+
 }
 
 //메시지가 없다면 (오류가 없다면)
@@ -50,7 +57,24 @@ if(empty($msg)) {
 		$msg = '정상적으로 글이 ' . $msgState . '되었습니다.';
 		if(empty($bNo)) {
 			$bNo = $db->insert_id;
-		}
+
+//// 게시판 아이디를 얻고, 패스를 정하여 업로드한 파일을 옮겨준다.
+            $bbsid = $bNo;
+
+            $path = './image_up';
+
+
+//$path = "/testBBS";
+            $filename =  date("YmdHis").".jpg";
+            $move = move_uploaded_file($_FILES['imageform']['tmp_name'],"$path/$filename");
+
+            $query = "insert into test_image (bbsNo,path,filename) values ('$bbsid', '$path','$filename')";
+
+            $imgresult = $db->query($query);
+
+
+
+        }
 		$replaceURL = './read.php?bno=' . $bNo;
 	} else {
 		$msg = '글을 ' . $msgState . '하지 못했습니다.';
@@ -65,7 +89,33 @@ if(empty($msg)) {
 }
 
 ?>
+<?php
+
+echo $msg;
+// if($imgresult ){
+//     echo "insert image success";
+// }
+// else{
+//     echo "upload failed";
+//
+// }
+//
+// if($move){
+//     echo 'move success';
+// }
+// else{
+//     echo 'move fail';
+//
+// }
+
+
+
+?>
+
+
 <script>
 	alert("<?php echo $msg?>");
-	location.replace("<?php echo $replaceURL?>");
+	location.replace("<?php
+
+        echo $replaceURL?>");
 </script>

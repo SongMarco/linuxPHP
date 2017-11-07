@@ -135,7 +135,6 @@ $result = $db->query($sql);
 
             ?>
 
-        <a href="javascript:onClick=writeConfirm()" >글쓰기</a>
             <tr>
                 <th scope="row"><label for="coContent"></label></th>
                 <td style="text-align: right">댓글을 달려면 로그인하세요</td>

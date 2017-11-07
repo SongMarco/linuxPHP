@@ -38,7 +38,7 @@ if(!empty($row2)){
 //    echo "<img src='".$row2['path']."/".$row2['filename']."' style=\"max-width: 70%; height: auto;\" />";
 
 	?>
-    <img src='<?php echo $row2['path']."/".$row2['filename']?>' style="width: 60%; height: auto;" />
+    <img src='<?php echo $row2['path']."/".$row2['filename']?>' style="max-width: 400px; height: auto;" />
 
     <?php
 

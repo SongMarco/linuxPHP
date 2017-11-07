@@ -4,6 +4,9 @@
     <title>게시물 작성 예제 폼</title>
 </head>
 <body>
+
+
+<!--주의사항 :: enctype="multipart/form-data" 이걸 꼭 해야 파일 업로드 가능하다.-->
 <form enctype="multipart/form-data" name="form" method="post" action="write.php">
     <table>
         <tr>

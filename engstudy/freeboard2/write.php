@@ -4,6 +4,14 @@ require_once("../dbconfig.php");
 
 include "../include/session.php";
 
+// 게시판 아이디를 얻고, 패스를 정하여 업로드한 파일을 옮겨준다.
+// @@@@@@@@@@@@@@주의사항 @@@ :::: 반드시 해당 패스에 권한부여할것.
+//ini_set("display_errors", 1); 이거로 에러를 반드시 확인할 것!!!!
+////chmod -R 777 /app/apache/htdocs/project/engstudy/freeboard2/image_up
+///
+ini_set("display_errors", 1);
+
+
 
 
 
@@ -46,7 +54,7 @@ if(isset($bNo)) {
 	<article class="boardArticle">
 		<h3 style="text-align: center">자유게시판 글쓰기</h3>
 		<div id="boardWrite">
-			<form action="./write_update.php" method="post">
+			<form enctype="multipart/form-data" name="form" action="./write_update.php" method="post">
 				<?php
 				if(isset($bNo)) {
 					echo '<input type="hidden" name="bno" value="' . $bNo . '">';
@@ -81,10 +89,16 @@ if(isset($bNo)) {
 							<th scope="row"><label for="bTitle">제목</label></th>
 							<td class="title"><input type="text" name="bTitle" id="bTitle" value="<?php echo isset($row['b_title'])?$row['b_title']:null?>"></td>
 						</tr>
+                        <tr>
+                            <th scope="row"><label for="bContent">이미지 첨부</label></th>
+                            <td><input type="file" name="imageform" /></td>
+                        </tr>
 						<tr>
 							<th scope="row"><label for="bContent">내용</label></th>
 							<td class="content"><textarea name="bContent" id="bContent"><?php echo isset($row['b_content'])?$row['b_content']:null?></textarea></td>
 						</tr>
+
+
 					</tbody>
 				</table>
 				<div class="btnSet">

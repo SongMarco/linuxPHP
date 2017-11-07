@@ -2,6 +2,7 @@
 require_once("../dbconfig.php");
 include "../include/session.php";
 $bNo = $_GET['bno'];
+//ini_set("display_errors", 1);
 
 if(!empty($bNo) && empty($_COOKIE['board_free_' . $bNo])) {
     $sql = 'update board_free set b_hit = b_hit + 1 where b_no = ' . $bNo;
@@ -21,7 +22,13 @@ if(!empty($bNo) && empty($_COOKIE['board_free_' . $bNo])) {
 $sql = 'select b_title, b_content, b_date, b_hit, b_id from board_free where b_no = ' . $bNo;
 $result = $db->query($sql);
 $row = $result->fetch_assoc();
+
+$result = $db->query("select * from test_image where bbsNo=".$bNo);
+$row2 = $result->fetch_assoc();
+
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,9 +36,8 @@ $row = $result->fetch_assoc();
     <title>자유게시판</title>
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/board.css" />
-    <script src="./js/jquery-2.1.3.min.js"></script>\
+    <script src="./js/jquery-2.1.3.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-
     <link rel="stylesheet" href="ht tps://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 
@@ -49,10 +55,11 @@ $row = $result->fetch_assoc();
 
 
     <div id="boardView">
-        <div ><?php
+        <div >
+            <?php
             include "../include/session.php";
 
-//            echo $_SESSION['ses_userName'].'님 환영합니다.';?>
+            // echo $_SESSION['ses_userName'].'님 환영합니다.';?>
 
         </div>
 
@@ -61,6 +68,28 @@ $row = $result->fetch_assoc();
             <span id="boardID">작성자: <?php echo $row['b_id']?></span>
             <span id="boardDate">작성일: <?php echo $row['b_date']?></span>
             <span id="boardHit">조회: <?php echo $row['b_hit']?></span>
+        </div>
+
+
+        <div>
+
+            <?php
+            if(!empty($row2)){
+//    echo "<img src='".$row2['path']."/".$row2['filename']."' style=\"max-width: 70%; height: auto;\" />";
+
+                ?>
+                <img src='<?php echo $row2['path']."/".$row2['filename']?>' style="max-width: 400px; height: auto;" />
+
+                <?php
+
+
+            }
+            else
+                echo "이미지 없음";
+
+            ?>
+
+
         </div>
         <div id="boardContent"><?php echo $row['b_content']?></div>
         <div class="btnSet">
