@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -46,8 +49,56 @@
 
             <?php
             include "./include/dbConnect.php";
-
+            ini_set("display_errors", 1);
             $searchWord = $_GET['searchWord'];
+
+            $filepath = "/app/apache/htdocs/project/engstudy/assets/img";
+
+            $filename = $filepath."/".$searchWord."*";
+
+            $cnt = 0;
+
+            $arr = array();
+
+            foreach (glob($filename) as $filefound) {
+                $cnt++;
+                $arr[] = $filefound;
+            }
+
+
+//            $cutPath = 'project';
+//            $bre = strstr($arr[0] , $cutPath);
+//            echo $bre;
+            $cutPath = 'assets';
+
+            for($i = 0; isset( $arr[$i] ); $i++ ){
+
+
+                $tmp = strstr($arr[$i] , $cutPath);
+//                echo $tmp."</br>";
+
+                $arr[$i] = $tmp;
+//                echo  $arr[$i];
+
+
+            }
+
+//            echo $cnt;
+//
+//            echo '<br>';
+//
+//            echo print_r($arr);
+
+            for($i = 0; isset( $arr[$i] ); $i++ ){
+
+                ?>
+
+                <img src='<?php echo $arr[$i] ?>' style="max-width: 400px; height: auto;" />
+
+                <?php
+            }
+
+
 
             //PHP에서 유효성 재확인
 
@@ -57,12 +108,22 @@
             // 일치하는 단어를 찾았다. -- 아이디 중복체크 로직을 그대로 사용함
             if($res->num_rows >= 1){
                 while( $row = mysqli_fetch_array($res) ){   //데이터가 존재할경우 반복 실행, 한줄 한줄 출력.
-                    $searchWord = $row[searchWord];
-                    $searchKor = $row[searchKor];
+                    $searchWord = $row['searchWord'];
+                    $searchKor = $row['searchKor'];
 
                     echo "$searchWord ";
                     echo "$searchKor ";
-                    echo "<br>";
+
+
+
+
+
+
+
+
+
+
+                echo "<br>";
 
             include "./include/dbConnect.php";
 
@@ -81,10 +142,10 @@
 //            $recent_arr = explode(",",$_COOKIE['recent_search']);
 //            print_r($recent_arr);
             ?>
-        <script>
-            alert(document.cookie);
-
-        </script>
+<!--        <script>-->
+<!--            alert(document.cookie);-->
+<!---->
+<!--        </script>-->
                     <?php
 
                 }

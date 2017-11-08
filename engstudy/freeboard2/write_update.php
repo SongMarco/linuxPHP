@@ -2,7 +2,7 @@
 	include"../dbconfig.php";
 
 	include "../include/session.php";
-ini_set("display_errors", 1);
+//ini_set("display_errors", 1);
 
 	//$_POST['bno']이 있을 때만 $bno 선언
 	if(isset($_POST['bno'])) {
@@ -63,6 +63,8 @@ if(empty($msg)) {
 		$msg = '정상적으로 글이 ' . $msgState . '되었습니다.';
         //쓰기모드였으면 bno를 새로 세팅한다.
 
+
+        //신규 작성!!@@
 		if(empty($bNo)) {
 			$bNo = $db->insert_id;
 
@@ -72,7 +74,7 @@ if(empty($msg)) {
 
 
 //$path = "/testBBS";
-            $filename =  date("YmdHis").".jpg";
+            $filename =  $_FILES['imageform']['name'];
             $move = move_uploaded_file($_FILES['imageform']['tmp_name'],"$path/$filename");
 
 

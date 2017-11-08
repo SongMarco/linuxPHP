@@ -90,7 +90,12 @@ if(isset($bNo)) {
 						</tr>
                         <tr>
                             <th scope="row"><label for="bContent">이미지 첨부</label></th>
-                            <td><input type="file" name="imageform" /></td>
+                            <td><input type="file" name="imageform" id="imageform" /></td>
+
+<!--                            <input type="file" id="excelFile" name="excelFile" title="첨부파일" />-->
+
+
+
                         </tr>
 
                         <?php
