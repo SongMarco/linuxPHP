@@ -19,10 +19,12 @@ if(!empty($bNo) && empty($_COOKIE['board_free_' . $bNo])) {
     }
 }
 
+//게시판 내용 불러오기.
 $sql = 'select b_title, b_content, b_date, b_hit, b_id from board_free where b_no = ' . $bNo;
 $result = $db->query($sql);
 $row = $result->fetch_assoc();
 
+// 게시판 이미지 불러오기.
 $result = $db->query("select * from test_image where bbsNo=".$bNo);
 $row2 = $result->fetch_assoc();
 
@@ -85,7 +87,7 @@ $row2 = $result->fetch_assoc();
 
             }
             else
-                echo "이미지 없음";
+//                echo "이미지 없음";
 
             ?>
 

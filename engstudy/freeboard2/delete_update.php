@@ -1,6 +1,7 @@
 <?php
 	require_once("../dbconfig.php");
 
+	//todo 삭제시 업로드한 파일 삭제하고, 파일디비에서 지워야 한다.
 	//$_POST['bno']이 있을 때만 $bno 선언
 	if(isset($_POST['bno'])) {
 		$bNo = $_POST['bno'];

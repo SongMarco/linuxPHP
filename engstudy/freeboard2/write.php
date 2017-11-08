@@ -3,12 +3,6 @@
 require_once("../dbconfig.php");
 
 include "../include/session.php";
-
-// 게시판 아이디를 얻고, 패스를 정하여 업로드한 파일을 옮겨준다.
-// @@@@@@@@@@@@@@주의사항 @@@ :::: 반드시 해당 패스에 권한부여할것.
-//ini_set("display_errors", 1); 이거로 에러를 반드시 확인할 것!!!!
-////chmod -R 777 /app/apache/htdocs/project/engstudy/freeboard2/image_up
-///
 ini_set("display_errors", 1);
 
 
@@ -25,7 +19,12 @@ ini_set("display_errors", 1);
 		$sql = 'select b_title, b_content, b_id from board_free where b_no = ' . $bNo;
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
-	}
+
+        // 게시판 이미지 불러오기. isset(row2)를 통해 기존 이미지 유무 확인 가능.
+        $result = $db->query("select * from test_image where bbsNo=".$bNo);
+        $row2 = $result->fetch_assoc();
+
+    }
 
 
 if(isset($bNo)) {
@@ -93,6 +92,34 @@ if(isset($bNo)) {
                             <th scope="row"><label for="bContent">이미지 첨부</label></th>
                             <td><input type="file" name="imageform" /></td>
                         </tr>
+
+                        <?php
+
+                        if(isset($row2)){
+
+                            ?>
+
+                            <tr>
+                                <th scope="row"><label for="bContent">기존 이미지</label></th>
+<!--                                <td>--><?php //echo $row2['path']."/".$row2['filename']?><!--</td>-->
+                                <td>
+                                    <img src='<?php echo $row2['path']."/".$row2['filename']?>' style="max-width: 50px; height: auto;" />
+                                </td>
+
+                            </tr>
+
+
+
+
+                            <?php
+                        }
+
+
+
+
+                        ?>
+
+
 						<tr>
 							<th scope="row"><label for="bContent">내용</label></th>
 							<td class="content"><textarea name="bContent" id="bContent"><?php echo isset($row['b_content'])?$row['b_content']:null?></textarea></td>
