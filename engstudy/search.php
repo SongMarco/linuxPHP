@@ -14,9 +14,47 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/user.css">
     <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
 <body>
+<div style="text-align: right">
+
+    <?php
+    include "./include/session.php";
+
+
+
+
+
+    if($_SESSION['ses_userName']){
+
+        if($_SESSION['ses_userName'] !== 'jamsya'){
+            echo $_SESSION['ses_userName'].'님 환영합니다. ';
+        }
+        else{
+            echo "관리자 계정입니다. ".$_SESSION['ses_userName'].'님 환영합니다. ';
+        }
+
+
+        if( $_COOKIE['auto_login'] == 'on' ){
+            echo "자동 로그인".$_COOKIE['auto_login'];
+        }
+        else{
+
+            echo $_SESSION['expireTime'];
+            echo "초 후에 로그아웃됩니다.";
+        }
+    }
+
+
+    ?>
+
+
+
+</div>
+
+
 <div>
     <nav class="navbar navbar-default">
         <div class="container">
@@ -26,19 +64,58 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="active" role="presentation"><a href="index.php">홈 </a></li>
-                    <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>
-                    <li role="presentation"><a href="#">자유게시판 </a></li>
+                    <!--                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>-->
+                    <li role="presentation"><a href="./freeboard2">자유게시판 </a></li>
                     <li role="presentation"><a href="contact.php">문의하기 </a></li>
+                    <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
                 </ul>
                 <form action = "./search.php" class="navbar-form navbar-left" target="_self" method="get">
                     <div class="form-group">
                         <label class="control-label" for="search-field">Typo 검색</label>
                         <input class="form-control search-field" type="search" name="searchWord" id="search-field">
                     </div>
+
                     <button class="btn btn-primary" type="submit" style="background-color:rgb(75,84,75);"> <i class="glyphicon glyphicon-search"></i></button>
                 </form>
-                <a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member/signUpForm.php" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                <a class="btn btn-primary navbar-btn navbar-right" role="button" href="./member"style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a></div>
+
+                <ul class="nav navbar-nav">
+
+                    <li ><a href="./recent">최근검색 </a></li>
+                    <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
+                </ul>
+
+
+                <div>
+
+                    <a id="login" class="btn btn-primary navbar-btn " role="button" href="./LoginMember" style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+                    <a id="join" class="btn btn-primary navbar-btn " role="button" href="joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
+                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="./LoginMember/logout.php" style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
+
+                    <script>
+
+                        var is_logged_in = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
+
+                        if (is_logged_in) {
+
+                            document.getElementById('join').style.display='none';
+                            document.getElementById('login').style.display='none';
+                            //your code..$(".class or #id").addClass("xyz");//show,hide or any appropriate action
+                        } else {
+
+                            document.getElementById('logout').style.display='none';
+                        }
+
+
+                        //                        $("a").click(function ( event ) {
+                        //                            event.preventDefault();
+                        //                            $(this).hide();
+                        //                        });
+
+
+                    </script>
+
+                </div>
+            </div>
         </div>
     </nav>
 </div>
@@ -49,9 +126,17 @@
 
             <?php
             include "./include/dbConnect.php";
-            ini_set("display_errors", 1);
+//            ini_set("display_errors", 1);
             $searchWord = $_GET['searchWord'];
 
+
+
+
+
+
+
+
+            // 이미지 검색하기. 서버의 지정된 경로를 탐색하고 문서를 반환한다.
             $filepath = "/app/apache/htdocs/project/engstudy/assets/img";
 
             $filename = $filepath."/".$searchWord."*";
@@ -66,9 +151,9 @@
             }
 
 
-//            $cutPath = 'project';
-//            $bre = strstr($arr[0] , $cutPath);
-//            echo $bre;
+
+
+
             $cutPath = 'assets';
 
             for($i = 0; isset( $arr[$i] ); $i++ ){
@@ -83,11 +168,6 @@
 
             }
 
-//            echo $cnt;
-//
-//            echo '<br>';
-//
-//            echo print_r($arr);
 
             for($i = 0; isset( $arr[$i] ); $i++ ){
 
@@ -97,6 +177,47 @@
 
                 <?php
             }
+
+
+            $mean_arr = array();
+          //사전 뜻 추가하기. 사전 뜻이 한자면 ''로 만들어버린다.
+
+            $url = 'https://glosbe.com/gapi/translate?from=eng&dest=kor&format=json&pretty=true&phrase='.$searchWord;
+            $content = file_get_contents($url);
+            $json = json_decode($content, true);
+            echo "</br>";
+            for($i = 0; $i <10; $i++ ){
+
+
+                    preg_match_all('!['
+                        .'\x{2E80}-\x{2EFF}'// 한,중,일 부수 보충
+                        .'\x{31C0}-\x{31EF}\x{3200}-\x{32FF}'
+                        .'\x{3400}-\x{4DBF}\x{4E00}-\x{9FBF}\x{F900}-\x{FAFF}'
+                        .'\x{20000}-\x{2A6DF}\x{2F800}-\x{2FA1F}'// 한,중,일 호환한자
+                        .']+!u', $json['tuc'][$i]['phrase']['text'], $match);
+
+//                    echo $json['tuc'][$i]['phrase']['text']. "=" .$match[0][0]."</br>";
+                    if($match[0][0]){
+                        $json['tuc'][$i]['phrase']['text'] = '';
+                    }
+
+                print $json['tuc'][$i]['phrase']['text'];
+                if($json['tuc'][$i]['phrase']['text'] !== ''){
+
+                    array_push($mean_arr, $json['tuc'][$i]['phrase']['text']);
+                    echo "</br>";
+                }
+
+            }
+//            foreach($json['tuc'] as $item) {
+//                print $item['phrase']['text'];
+//                echo "</br>";
+//            }
+
+
+
+
+
 
 
 
@@ -113,14 +234,6 @@
 
                     echo "$searchWord ";
                     echo "$searchKor ";
-
-
-
-
-
-
-
-
 
 
                 echo "<br>";

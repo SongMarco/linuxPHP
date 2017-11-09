@@ -92,11 +92,65 @@ if(isset($bNo)) {
                             <th scope="row"><label for="bContent">이미지 첨부</label></th>
                             <td><input type="file" name="imageform" id="imageform" /></td>
 
-<!--                            <input type="file" id="excelFile" name="excelFile" title="첨부파일" />-->
+<!--                            <article>-->
+<!--                                <p id="status">File API & FileReader API not supported</p>-->
+<!--                                <p><input type=file></p>-->
+<!--                                <p>Select an image from your machine to read the contents of the file without using a server</p>-->
+<!--                                <div id="holder"></div>-->
+<!--                            </article>-->
+
+
 
 
 
                         </tr>
+
+
+                        <tr>
+
+
+                            <th scope="row"><label for="bContent">이미지 </br> 미리보기</label></th>
+                            <!--                                <td>--><?php //echo $row2['path']."/".$row2['filename']?><!--</td>-->
+                            <td id="holder">
+                                <p id="status"></p>
+                                <img id = "img_preview" src='<?php echo $row2['path']."/".$row2['filename']?>' style="max-width: 50px; height: auto;" />
+                            </td>
+
+                        </tr>
+
+                        <script>
+                            var upload = document.getElementById('imageform'),
+                                holder = document.getElementById('holder'),
+                                state = document.getElementById('status');
+
+                            if (typeof window.FileReader === 'undefined') {
+                                state.className = 'fail';
+                            } else {
+                                state.className = 'success';
+                                state.innerHTML = '';
+                            }
+
+                            upload.onchange = function (e) {
+                                e.preventDefault();
+
+                                var file = upload.files[0],
+                                    reader = new FileReader();
+                                reader.onload = function (event) {
+                                    var img = document.getElementById('img_preview');
+                                    img.src = event.target.result;
+                                    // note: no onload required since we've got the dataurl...I think! :)
+//            if (img.width > 300) { // holder width
+//                img.width = 300;
+//            }
+                                    img.width =50;
+                                    holder.innerHTML = '';
+                                    holder.appendChild(img);
+                                };
+                                reader.readAsDataURL(file);
+
+                                return false;
+                            };
+                        </script>
 
                         <?php
 
@@ -104,14 +158,7 @@ if(isset($bNo)) {
 
                             ?>
 
-                            <tr>
-                                <th scope="row"><label for="bContent">기존 이미지</label></th>
-<!--                                <td>--><?php //echo $row2['path']."/".$row2['filename']?><!--</td>-->
-                                <td>
-                                    <img src='<?php echo $row2['path']."/".$row2['filename']?>' style="max-width: 50px; height: auto;" />
-                                </td>
 
-                            </tr>
 
 
 
