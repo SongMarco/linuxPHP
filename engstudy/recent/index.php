@@ -123,24 +123,62 @@
     <?php
 
     $recent = explode(",", $_COOKIE['recent_search']);
+
+
+
+//    $recent2 = explode( "::", $recent);
+
     $recent = array_reverse($recent);
 //    print_r($recent); //최근 것부터 정렬하기 위해 배열 순서를 반대로 바꿔준다.
 
 
-    while($i<5){ //출력할 상품 목록의 수 설정
-        if($brandcode==$tod[$i]){
-            $save=no;
+    $eng_arr=array();
+    $kor_arr=array();
+
+    // 먼저 :: 기준으로 단어와 뜻을 분리한다.
+    for($i=0; $recent[$i]; $i++) {
+
+        $split = explode("::", $recent[$i]);
+
+        array_push($eng_arr, $split[0] );
+        array_push($kor_arr, $split[1]);
+
+
         }
-        $i++;
+
+        // serialize 되어있던 단어뜻을 unserialize 한 뒤 단어와 함께 내보낸다.
+
+
+    for($i=0; $eng_arr[$i]; $i++) {
+
+        echo $eng_arr[$i]."</br>";
+
+        $kor_mean = unserialize($kor_arr[$i]);//문자열 -> 뜻의 배열
+
+        for($j = 0; $kor_mean[$j]; $j++){
+            echo $kor_mean[$j]."</br>";
+
+        }
+
+
     }
 
-    for($i=0; $recent[$i]; $i++) {
-        if ($recent[$i] != "") {
-            echo($recent[$i]);
-            echo "<br />\n";
-          
-        }
-    }
+//    print_r($eng_arr);
+//    echo "</br>";
+//    print_r($kor_arr);
+
+
+
+//    print_r($recent2);
+
+//
+//    for($i=0; $recent[$i]; $i++) {
+//        if ($recent[$i] != "") {
+//            echo($recent[$i]);
+//            echo "<br />\n";
+//
+//        }
+//    }
 
     ?>
 

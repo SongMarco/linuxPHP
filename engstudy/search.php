@@ -23,6 +23,8 @@
     <?php
     include "./include/session.php";
 
+    include "./include/dbConnect.php";
+
 
 
 
@@ -93,7 +95,7 @@
 
                     <script>
 
-                        var is_logged_in = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
+                        var is_logged_in = "<?php  ob_start(); echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
 
                         if (is_logged_in) {
 
@@ -125,8 +127,8 @@
         <div class="col-md-7" ">
 
             <?php
-            include "./include/dbConnect.php";
-//            ini_set("display_errors", 1);
+
+
             $searchWord = $_GET['searchWord'];
 
 
@@ -202,68 +204,47 @@
                     }
 
                 print $json['tuc'][$i]['phrase']['text'];
-                if($json['tuc'][$i]['phrase']['text'] !== ''){
 
+                if( isset($json['tuc'][$i]['phrase']['text']) ){
+
+                    if(count($mean_arr) < 5 )
                     array_push($mean_arr, $json['tuc'][$i]['phrase']['text']);
                     echo "</br>";
                 }
 
             }
-//            foreach($json['tuc'] as $item) {
-//                print $item['phrase']['text'];
-//                echo "</br>";
-//            }
+
+            $ser_arr = serialize($mean_arr);
+
+            print_r($mean_arr);
 
 
 
-
-
-
-
-
-            //PHP에서 유효성 재확인
-
-            //키워드 중복 검사
-            $sql = "SELECT * FROM search WHERE searchWord = '{$searchWord}'";
-            $res = $dbConnect->query($sql);
-            // 일치하는 단어를 찾았다. -- 아이디 중복체크 로직을 그대로 사용함
-            if($res->num_rows >= 1){
-                while( $row = mysqli_fetch_array($res) ){   //데이터가 존재할경우 반복 실행, 한줄 한줄 출력.
-                    $searchWord = $row['searchWord'];
-                    $searchKor = $row['searchKor'];
 
                     echo "$searchWord ";
-                    echo "$searchKor ";
+//                    echo "$searchKor ";
 
 
                 echo "<br>";
 
-            include "./include/dbConnect.php";
-
-            $searchWord = $_GET['searchWord'];
+            ini_set("display_errors", 1);
 
             //쿠키값이 없을 경우 즉 처음 저장하는 경우
-            if($_COOKIE['recent_search']==""){
-                setcookie('recent_search', $searchWord. " : ". $searchKor, time() + 86400, "/");
+
+
+            if( !isset ($_COOKIE['recent_search'])){
+                setcookie('recent_search',  $searchWord."::".$ser_arr, time() + 86400, "/");
             }
             //저장된 쿠키값이 존재하고, 중복된 값이 아닌 경우
             else if($_COOKIE['recent_search'] != "" ){
-                setcookie('recent_search' , $_COOKIE['recent_search']. "," . $searchWord. " : ". $searchKor
+                setcookie('recent_search' , $_COOKIE['recent_search']. "," . $searchWord."::".$ser_arr
                     , time() + 86400, "/");
             }
+                    ob_end_flush();  ?>
 
-//            $recent_arr = explode(",",$_COOKIE['recent_search']);
-//            print_r($recent_arr);
-            ?>
-<!--        <script>-->
-<!--            alert(document.cookie);-->
-<!---->
-<!--        </script>-->
-                    <?php
 
-                }
-            }
-            ?>
+
+
 
         </div>
         <div class="col-md-12"></div>
