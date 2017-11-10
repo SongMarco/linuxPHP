@@ -122,9 +122,9 @@
     </nav>
 </div>
 
-<div class="container" style="padding:134px;">
+<div class="container" style="padding:60px;">
     <div class="row product" style="width:910px;">
-        <div class="col-md-7" ">
+        <div class="col-md-8 col-md-offset-3" style="margin-left:25%; border:4px green solid;">
 
             <?php
 
@@ -145,53 +145,67 @@
 
             $cnt = 0;
 
-            $arr = array();
+            $pict_arr = array();
 
             foreach (glob($filename) as $filefound) {
                 $cnt++;
-                $arr[] = $filefound;
+                array_push($pict_arr, $filefound);
+//                $arr[] = $filefound;
             }
-
-
-
 
 
             $cutPath = 'assets';
 
-            for($i = 0; isset( $arr[$i] ); $i++ ){
+            for($i = 0; isset( $pict_arr[$i] ); $i++ ){
 
 
-                $tmp = strstr($arr[$i] , $cutPath);
+                $tmp = strstr($pict_arr[$i] , $cutPath);
 //                echo $tmp."</br>";
 
-                $arr[$i] = $tmp;
+                $pict_arr[$i] = $tmp;
 //                echo  $arr[$i];
 
 
             }
 
 
-            for($i = 0; isset( $arr[$i] ); $i++ ){
+            for($i = 0; isset( $pict_arr[$i] ); $i++ ){
 
                 ?>
 
-                <img src='<?php echo $arr[$i] ?>' style="max-width: 400px; height: auto;" />
+                <img src='<?php echo $pict_arr[$i] ?>' style="max-width: 400px; height: auto;" />
 
                 <?php
             }
 
 
             $mean_arr = array();
-          //사전 뜻 추가하기. 사전 뜻이 한자면 ''로 만들어버린다.
+            //사전 뜻 추가하기. 사전 뜻이 한자면 ''로 만들어버린다.
 
             $url = 'https://glosbe.com/gapi/translate?from=eng&dest=kor&format=json&pretty=true&phrase='.$searchWord;
             $content = file_get_contents($url);
             $json = json_decode($content, true);
             echo "</br>";
 
-            echo "$searchWord ". "  ::  ";
 
-            for($i = 0; $i <10; $i++ ){
+            ?>
+
+            <div style="text-align:center; border:1px gray solid;"  >
+<span style = "font-size:36px;  color: green;">
+ <?php echo $searchWord ?>
+</span>
+
+
+            </div >
+            <?php
+
+            ?>
+
+            <div style="text-align:center; border:1px gray solid;">
+
+                <?php
+
+                for($i = 0; $i <10; $i++ ){
 
 
                     preg_match_all('!['
@@ -206,25 +220,29 @@
                         $json['tuc'][$i]['phrase']['text'] = '';
                     }
 
-                print $json['tuc'][$i]['phrase']['text'];
 
-                if( isset($json['tuc'][$i]['phrase']['text']) ){
+                    $k = $i+1;
+                    if( isset($json['tuc'][$i]['phrase']['text']) ){
 
-                    if(count($mean_arr) < 5 )
-                    array_push($mean_arr, $json['tuc'][$i]['phrase']['text']);
 
-                    echo ";   ";
+                        if(count($mean_arr) < 5 ){
+
+
+                            echo "($k) ".$json['tuc'][$i]['phrase']['text'];
+                            array_push($mean_arr, $json['tuc'][$i]['phrase']['text']);
+
+                            echo "      ";
+                        }
+
+
+                    }
+
                 }
-
-            }
-
+            ?> </div> <?php
             $ser_arr = serialize($mean_arr);
-//
-//            print_r($mean_arr);
-//                    echo "$searchKor ";
-
-
-                echo "<br>";
+            //
+            //            print_r($mean_arr);
+            //                    echo "$searchKor ";
 
             ini_set("display_errors", 1);
 
@@ -236,22 +254,28 @@
             }
             //저장된 쿠키값이 존재하고, 중복된 값이 아닌 경우
             else if($_COOKIE['recent_search'] != "" ){
-                setcookie('recent_search' , $_COOKIE['recent_search']. "," . $searchWord."::".$ser_arr
-                    , time() + 86400, "/");
+
+                if( !strpos($_COOKIE['recent_search'],$searchWord) ){
+                    setcookie('recent_search' , $_COOKIE['recent_search']. "," . $searchWord."::".$ser_arr
+                        , time() + 86400, "/");
+                }
+
+
+
             }
 
 
             ?>
 
-        <br>
-        외부 사전에서 찾기<br>
-        <a href="http://endic.naver.com/popManager.nhn?sLn=kr&m=search&query=<?php echo $searchWord ?>" target="_blank"> 네이버 사전</a>
-        <br>
-        <a href="http://dic.daum.net/search.do?q=<?php echo $searchWord ?>" target="_blank">다음 사전</a>
+            <div style="text-align: right; border:1px gray solid;">
+            외부 사전에서 찾기<br>
+            <a href="http://endic.naver.com/popManager.nhn?sLn=kr&m=search&query=<?php echo $searchWord ?>" target="_blank"> 네이버 사전</a>
+            <br>
+            <a href="http://dic.daum.net/search.do?q=<?php echo $searchWord ?>" target="_blank">다음 사전</a>
+            </div>
+            <?php
 
-        <?php
-
-                    ob_end_flush();  ?>
+            ob_end_flush();  ?>
 
         </div>
         <div class="col-md-12"></div>
