@@ -30,7 +30,7 @@ if ($row != null) {
     $_SESSION['expireTime']= $expireTime;
 
     echo $_SESSION['ses_userName'].'님 로그인되셨습니다.';
- print_r($_POST);
+// print_r($_POST);
 
     sleep(1);
 
@@ -38,6 +38,12 @@ if ($row != null) {
 }
 
 if($row == null){
-    echo "로그인 실패 아이디 또는 비밀번호가 일치하지 않습니다.";
+
+    echo "
+<script>
+alert('로그인 실패 ! 아이디 또는 비밀번호가 일치하지 않습니다.');
+history.go(-1);
+</script>";
+
 }
 ?>

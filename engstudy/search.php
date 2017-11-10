@@ -244,21 +244,38 @@
             //            print_r($mean_arr);
             //                    echo "$searchKor ";
 
-            ini_set("display_errors", 1);
+//            ini_set("display_errors", 1);
 
             //쿠키값이 없을 경우 즉 처음 저장하는 경우
 
 
             if( !isset ($_COOKIE['recent_search'])){
                 setcookie('recent_search',  $searchWord."::".$ser_arr, time() + 86400, "/");
+                setcookie('recent_num',  1, time() + 86400, "/");
             }
             //저장된 쿠키값이 존재하고, 중복된 값이 아닌 경우
             else if($_COOKIE['recent_search'] != "" ){
 
-                if( !strpos($_COOKIE['recent_search'],$searchWord) ){
-                    setcookie('recent_search' , $_COOKIE['recent_search']. "," . $searchWord."::".$ser_arr
-                        , time() + 86400, "/");
+                //8개 이하면 그냥 추가함
+
+                    //중복 체크
+                    if( !strpos($_COOKIE['recent_search'],$searchWord) && isset($pict_arr[0])){
+                        setcookie('recent_search' , $_COOKIE['recent_search']. ",," . $searchWord."::".$ser_arr
+                            , time() + 86400, "/");
+
+
+                    }
+
+
+
+
+
+                // 8개 이상일 경우 앞의 쿠키데이터 하나를 제거한다.
+                else{
+
+
                 }
+
 
 
 

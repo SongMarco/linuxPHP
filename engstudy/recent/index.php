@@ -138,13 +138,13 @@
 
 
 
-$recent = explode(",", $_COOKIE['recent_search']);
+$recent = explode(",,", $_COOKIE['recent_search']);
 
 
 
-//    $recent2 = explode( "::", $recent);
+//$recent2 = explode( "::", $recent);
 
-$recent = array_reverse($recent);
+//$recent = array_reverse($recent);
 //    print_r($recent); //최근 것부터 정렬하기 위해 배열 순서를 반대로 바꿔준다.
 
 
@@ -162,6 +162,10 @@ for($i=0; $recent[$i]; $i++) {
 
 }
 
+$cnt = count($eng_arr);
+echo $cnt."<br>";
+
+
 // serialize 되어있던 단어뜻을 unserialize 한 뒤 단어와 함께 내보낸다.
 
 $kor_str_mean = array();
@@ -171,6 +175,7 @@ for($i=0; $eng_arr[$i]; $i++) {
 //    echo $eng_arr[$i]. "  ::  ";
 
     $kor_mean = unserialize($kor_arr[$i]);//문자열 -> 뜻의 배열
+
 
     for($j = 0; $kor_mean[$j]; $j++){
         if(isset($kor_str_mean[$i]) ){
@@ -193,7 +198,6 @@ $filepath = "/app/apache/htdocs/project/engstudy/assets/img";
 
 $pict_arr2 = array();
 
-$cnt = 0;
 for($i=0; $eng_arr[$i]; $i++) {
 
     $filename = $filepath."/".$eng_arr[$i]."*";
@@ -201,13 +205,13 @@ for($i=0; $eng_arr[$i]; $i++) {
 
 
     $pict_arr = array();
-        foreach (glob($filename) as $filefound) {
+    foreach (glob($filename) as $filefound) {
 
 
-            array_push($pict_arr, $filefound);
+        array_push($pict_arr, $filefound);
 //                $arr[] = $filefound;
 
-        }
+    }
 
 
 
@@ -231,13 +235,37 @@ for($i=0; $eng_arr[$i]; $i++) {
         array_push($pict_arr2, $pict_arr[$k] );
         ?>
 
-<!--        <img src= '../--><?php //echo $pict_arr[$k] ?><!--' style="max-width: 400px; height: auto;" />-->
+        <!--        <img src= '../--><?php //echo $pict_arr[$k] ?><!--' style="max-width: 400px; height: auto;" />-->
 
 
         <?php
     }
 
 }
+//print_r($kor_str_mean);
+if($cnt > 8){
+    for($l = 0; $l < 8; $l++){
+        $eng_arr[$l] = $eng_arr[$cnt+$l-8];
+        $kor_str_mean[$l] = $kor_str_mean[$cnt+$l-8];
+        $pict_arr2[$l] = $pict_arr2[$cnt+$l-8];
+    }
+
+    $offset = 8;
+    array_splice($eng_arr, $offset);
+    array_splice($kor_str_mean, $offset);
+    array_splice($pict_arr2, $offset);
+
+
+}
+
+
+            ini_set("display_errors", 1);
+
+//todo 8개가 넘어갔을 때 중복이 되면 최근 단어에 남지 않는 문제 발생. 일단 텍스트로 커버함, 쿠키 능동 삭제 필요. 무한히 늘어나버렷
+$eng_arr = array_reverse($eng_arr);
+$kor_str_mean = array_reverse($kor_str_mean);
+$pict_arr2 = array_reverse($pict_arr2);
+
 
 
 ?>
@@ -251,14 +279,14 @@ for($i=0; $eng_arr[$i]; $i++) {
                 <ol class="carousel-indicators">
                     <li data-target="#Carousel" data-slide-to="0" class="active"></li>
                     <li data-target="#Carousel" data-slide-to="1"></li>
-<!--                    <li data-target="#Carousel" data-slide-to="2"></li>-->
+                    <!--                    <li data-target="#Carousel" data-slide-to="2"></li>-->
                 </ol>
 
                 <!-- Carousel items -->
                 <div class="carousel-inner" style="margin-top:40px">
 
 
-<!--                    //todo 동적으로 추가하도록 php문을 만들고싶으나, 시간이 부족하다. 8개까지만 만들었다. -->
+                    <!--                    //todo 동적으로 추가하도록 php문을 만들고싶으나, 시간이 부족하다. 8개까지만 만들었다. -->
                     <div class="item active">
                         <div class="row">
                             <div class="col-md-3"><a href="<?php echo isset($eng_arr[0])? "../search.php?searchWord=".$eng_arr[0]:'#';  ?>" class="thumbnail"><img src='../<?php echo $pict_arr2[0] ?>' alt="이미지가 없습니다" style="max-width:100%;"><?php echo $kor_str_mean[0] ?></a></div>
@@ -273,7 +301,7 @@ for($i=0; $eng_arr[$i]; $i++) {
                             <div class="col-md-3"><a href="<?php echo isset($eng_arr[4])? "../search.php?searchWord=".$eng_arr[4]:'#';  ?>" class="thumbnail"><img src='../<?php echo $pict_arr2[4] ?>' alt="이미지가 없습니다" style="max-width:100%;"><?php echo $kor_str_mean[4] ?></a></div>
                             <div class="col-md-3"><a href="<?php echo isset($eng_arr[5])? "../search.php?searchWord=".$eng_arr[5]:'#';  ?>" class="thumbnail"><img src='../<?php echo $pict_arr2[5] ?>' alt="이미지가 없습니다" style="max-width:100%;"><?php echo $kor_str_mean[5] ?></a></div>
                             <div class="col-md-3"><a href="<?php echo isset($eng_arr[6])? "../search.php?searchWord=".$eng_arr[6]:'#';  ?>" class="thumbnail"><img src='../<?php echo $pict_arr2[6] ?>' alt="이미지가 없습니다" style="max-width:100%;"><?php echo $kor_str_mean[6] ?></a></div>
-                            <div class="col-md-3"><a href="<?php echo isset($eng_arr[7])? "../search.php?searchWord=".$eng_arr[7]:'#';  ?>" class="thumbnail"><img src='../<?php echo $pict_arr2[7] ?>' alt="이미지가 없습니다." style="max-width:100%;"><?php echo $kor_str_mean[7] ?></a></div>
+                            <div class="col-md-3"><a href="<?php echo isset($eng_arr[7])? "../search.php?searchWord=".$eng_arr[7]:'#';  ?>" class="thumbnail"><img src='../<?php echo $pict_arr2[7] ?>' alt="이미지가 없습니다" style="max-width:100%;"><?php echo $kor_str_mean[7] ?></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
@@ -290,7 +318,9 @@ for($i=0; $eng_arr[$i]; $i++) {
 
 
 <div class="container" style="padding:100px;">
+    <?php
 
+    ?>
 
 
 </div>

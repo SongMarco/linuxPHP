@@ -1,79 +1,32 @@
 
-
-<!DOCTYPE html>
-<html>
-
+<?php
+$recent = explode(",", $_COOKIE['recent_search']);
 
 
-<head>
 
-<!--    아래 4개 중 하나라도 없으면 캐러셀이 작동하지 않습니다-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/user.css">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+//    $recent2 = explode( "::", $recent);
 
-</head>
+$recent = array_reverse($recent);
 
 
-<body>
-<script>
-    $(document).ready(function() {
-        $('#Carousel').carousel({
-            interval: 5000
-        })
-    });
-</script>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div id="Carousel" class="carousel slide">
+$eng_arr = array();
+$kor_arr = array();
 
-                <ol class="carousel-indicators">
-                    <li data-target="#Carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#Carousel" data-slide-to="1"></li>
-                    <li data-target="#Carousel" data-slide-to="2"></li>
-                </ol>
+echo $_COOKIE['recent_search'];
+echo "</br>";
+echo "</br>";
 
-                <!-- Carousel items -->
-                <div class="carousel-inner">
+for($i=0; $recent[$i]; $i++) {
 
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                        </div><!--.row-->
-                    </div><!--.item-->
+    $split = explode("::", $recent[$i]);
 
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                        </div><!--.row-->
-                    </div><!--.item-->
+    array_push($eng_arr, $split[0]);
+    array_push($kor_arr, $split[1]);
+}
 
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                        </div><!--.row-->
-                    </div><!--.item-->
-
-                </div><!--.carousel-inner-->
-                <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
-                <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
-            </div><!--.Carousel-->
-
-        </div>
-    </div>
-</div><!--.container-->
-</body>
-</html>
+print_r($eng_arr);
+echo "</br>";
+print_r($kor_arr);
 
 
+?>
