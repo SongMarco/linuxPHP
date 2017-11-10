@@ -188,6 +188,9 @@
             $content = file_get_contents($url);
             $json = json_decode($content, true);
             echo "</br>";
+
+            echo "$searchWord ". "  ::  ";
+
             for($i = 0; $i <10; $i++ ){
 
 
@@ -209,19 +212,15 @@
 
                     if(count($mean_arr) < 5 )
                     array_push($mean_arr, $json['tuc'][$i]['phrase']['text']);
-                    echo "</br>";
+
+                    echo ";   ";
                 }
 
             }
 
             $ser_arr = serialize($mean_arr);
-
-            print_r($mean_arr);
-
-
-
-
-                    echo "$searchWord ";
+//
+//            print_r($mean_arr);
 //                    echo "$searchKor ";
 
 
@@ -240,11 +239,19 @@
                 setcookie('recent_search' , $_COOKIE['recent_search']. "," . $searchWord."::".$ser_arr
                     , time() + 86400, "/");
             }
+
+
+            ?>
+
+        <br>
+        외부 사전에서 찾기<br>
+        <a href="http://endic.naver.com/popManager.nhn?sLn=kr&m=search&query=<?php echo $searchWord ?>" target="_blank"> 네이버 사전</a>
+        <br>
+        <a href="http://dic.daum.net/search.do?q=<?php echo $searchWord ?>" target="_blank">다음 사전</a>
+
+        <?php
+
                     ob_end_flush();  ?>
-
-
-
-
 
         </div>
         <div class="col-md-12"></div>

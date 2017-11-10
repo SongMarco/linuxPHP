@@ -151,14 +151,16 @@
 
     for($i=0; $eng_arr[$i]; $i++) {
 
-        echo $eng_arr[$i]."</br>";
+        echo $eng_arr[$i]. "  ::  ";
 
         $kor_mean = unserialize($kor_arr[$i]);//문자열 -> 뜻의 배열
 
         for($j = 0; $kor_mean[$j]; $j++){
-            echo $kor_mean[$j]."</br>";
+            echo $kor_mean[$j]."; ";
 
         }
+
+        echo "</br>";
 
 
     }
