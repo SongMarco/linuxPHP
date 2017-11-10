@@ -178,7 +178,7 @@
                 <ul class="nav navbar-nav">
                     <li  role="presentation"><a href="../index.php">홈 </a></li>
                     <!--                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>-->
-                    <li class="active" role="presentation"><a href="../freeboard2">자유게시판 </a></li>
+                    <li class="active" role="presentation"><a href="../freeboard2">Typo게시판 </a></li>
                     <li role="presentation"><a href="../contact.php">문의하기 </a></li>
                     <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
                 </ul>
@@ -234,7 +234,7 @@
 </div>
 <div class="outer">
 	<article class="boardArticle; inner">
-        <div style="text-align: center"><h3 >자유게시판</h3></div>
+        <div style="text-align: center"><h3 >당신만의 Typo를 표현해보세요!</h3></div>
 
         <div id="boardList">
 

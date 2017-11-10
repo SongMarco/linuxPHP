@@ -68,7 +68,7 @@
                 <ul class="nav navbar-nav">
                     <li  role="presentation"><a href="../index.php">홈 </a></li>
                     <!--                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>-->
-                    <li role="presentation"><a href="../freeboard2">자유게시판 </a></li>
+                    <li role="presentation"><a href="../freeboard2">Typo게시판</a></li>
                     <li role="presentation"><a href="../contact.php">문의하기 </a></li>
                     <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
                 </ul>
@@ -163,7 +163,7 @@ for($i=0; $recent[$i]; $i++) {
 }
 
 $cnt = count($eng_arr);
-echo $cnt."<br>";
+//echo $cnt."<br>";
 
 
 // serialize 되어있던 단어뜻을 unserialize 한 뒤 단어와 함께 내보낸다.

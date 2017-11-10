@@ -70,7 +70,7 @@ if(empty($msg)) {
 
 //// 게시판 아이디를 얻고, 패스를 정하여 업로드한 파일을 옮겨준다.
 
-            $path = './image_up';
+            $path = '../assets/img';
 
 
 //$path = "/testBBS";
@@ -157,8 +157,8 @@ if(empty($msg)) {
 
 ?>
 <?php
-
-echo $msg;
+//
+//echo $msg;
 // if($imgresult ){
 //     echo "insert image success";
 // }
@@ -181,7 +181,7 @@ echo $msg;
 
 
 <script>
-	alert("<?php echo $msg?>");
+	alert("<?php echo $msg?>//");
 	location.replace("<?php
 
         echo $replaceURL?>");

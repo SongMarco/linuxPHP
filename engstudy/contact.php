@@ -62,7 +62,7 @@
                 <ul class="nav navbar-nav">
                     <li  role="presentation"><a href="index.php">홈 </a></li>
                     <!--                        <li role="presentation"><a href="./guide.php">활용 가이드 </a></li>-->
-                    <li role="presentation"><a href="./freeboard2">자유게시판 </a></li>
+                    <li role="presentation"><a href="./freeboard2">Typo게시판</a></li>
                     <li class="active" role="presentation"><a href="contact.php">문의하기 </a></li>
                     <!--                        <li role="presentation"><a href="./study">학습 </a></li>-->
                 </ul>
