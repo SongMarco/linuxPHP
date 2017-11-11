@@ -45,13 +45,13 @@ if(isset($bNo)) {
 
 
 	<meta charset="utf-8" />
-	<title>자유게시판</title>
+	<title>Typo게시판</title>
 	<link rel="stylesheet" href="./css/normalize.css" />
 	<link rel="stylesheet" href="css/board.css" />
 </head>
 <body>
 	<article class="boardArticle">
-		<h3 style="text-align: center">자유게시판 글쓰기</h3>
+		<h3 style="text-align: center">Typo게시판 글쓰기</h3>
 		<div id="boardWrite">
 			<form enctype="multipart/form-data" name="form" action="./write_update.php" method="post">
 				<?php

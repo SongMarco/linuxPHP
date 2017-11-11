@@ -53,7 +53,7 @@ $row2 = $result->fetch_assoc();
 <!--가운데 정렬하는법. 클래스 = 센터드를 추가해주었다. 위에 헤더에 스타일 - 센터드도 있음. 참고! -->
 <div class="centered ridge">
 <article >
-    <h3 style="text-align: center">자유게시판</h3>
+    <h3 style="text-align: center">Typo게시판</h3>
 
 
     <div id="boardView">
