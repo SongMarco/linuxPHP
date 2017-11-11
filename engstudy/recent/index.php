@@ -96,7 +96,7 @@
 
                     <script>
 
-                        var is_logged_in = "<?php echo $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
+                        var is_logged_in = "<?php  $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
 
                         if (is_logged_in) {
 

@@ -13,6 +13,7 @@ else{
     setcookie("auto_login", "off", time()-1,'/'  );
 }
 
+
 $memberEmail = $_POST['InputEmail'];
 $memberPw = md5($memberPw = $_POST['memberPw']);
 
