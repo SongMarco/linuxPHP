@@ -90,32 +90,34 @@
 
                 <div>
 
-                    <a id="login" class="btn btn-primary navbar-btn " role="button" href="../LoginMember" style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
-                    <a id="join" class="btn btn-primary navbar-btn " role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
-                    <a id="logout" class="btn btn-primary navbar-btn " role="button" href="../LoginMember/logout.php" style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
 
-                    <script>
+                    <?php
+                    if( isset($_SESSION['ses_userName']) ){
+                        ?>
 
-                        var is_logged_in = "<?php  $_SESSION['ses_userName'] ?>"; //$_SESSION['log_status']=true..assume
-
-                        if (is_logged_in) {
-
-                            document.getElementById('join').style.display='none';
-                            document.getElementById('login').style.display='none';
-                            //your code..$(".class or #id").addClass("xyz");//show,hide or any appropriate action
-                        } else {
-
-                            document.getElementById('logout').style.display='none';
-                        }
+                        <a id="logout" class="btn btn-primary navbar-btn " role="button" href="../LoginMember/logout.php" style="background-color:rgb(100,138,235);"><strong>로그아웃</strong> </a>
 
 
-                        //                        $("a").click(function ( event ) {
-                        //                            event.preventDefault();
-                        //                            $(this).hide();
-                        //                        });
+                        <?php
 
 
-                    </script>
+                    }
+                    else{
+
+                        ?>
+                        <a id="login" class="btn btn-primary navbar-btn " role="button" href="../LoginMember" style="background-color:rgb(100,138,235);"><strong>로그인</strong> </a>
+
+                        <a id="join" class="btn btn-primary navbar-btn " role="button" href="../joinMember" style="background-color:rgb(51,181,40);"><strong>회원가입</strong> </a>
+
+
+                        <?php
+
+                    }
+
+                    ?>
+
+
+
 
                 </div>
             </div>

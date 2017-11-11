@@ -1,6 +1,6 @@
 <?php
 
-$expireTime=500;
+$expireTime=3600;
 
 if($_COOKIE['auto_login']=="on"){
 
@@ -30,7 +30,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     session_destroy();   // destroy session data in storage
 
 
-    echo "<script>alert(\"세션이 만료되었습니다. 다시 로그인해주세요@@\");</script>";
+    echo "<script>alert(\"장시간 자리를 비우셨습니다. 다시 로그인해주세요@@\");</script>";
 
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
