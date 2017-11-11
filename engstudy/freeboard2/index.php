@@ -155,8 +155,9 @@
         }
         else{
 
-            echo $_SESSION['expireTime'];
-            echo "초 후에 로그아웃됩니다.";
+            $time = $_SESSION['expireTime']/60;
+
+            echo $time."분간 활동이 없을 경우 로그아웃됩니다.";
         }
     }
 

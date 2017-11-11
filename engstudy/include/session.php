@@ -8,6 +8,13 @@ if($_COOKIE['auto_login']=="on"){
     ini_set("session.cache_expire", 60*60*24*30);
     ini_set("session.gc_maxlifetime", 60*60*24*30);
 }
+else{
+    ini_set("session.cookie_lifetime", 0);
+    ini_set("session.cache_expire", 0);
+    ini_set("session.gc_maxlifetime", 0);
+
+
+}
 
 
 
@@ -30,7 +37,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     session_destroy();   // destroy session data in storage
 
 
-    echo "<script>alert(\"장시간 자리를 비우셨습니다. 다시 로그인해주세요@@\");</script>";
+//    echo "<script>alert(\"장시간 자리를 비우셨습니다. 다시 로그인해주세요@@\");</script>";
 
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
