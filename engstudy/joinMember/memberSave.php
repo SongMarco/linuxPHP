@@ -1,4 +1,4 @@
-<h1 class="title"><a href="../index.php">홈으로</a></h1>
+
 <?php
 include "../include/dbConnect.php";
 
